@@ -1,20 +1,17 @@
 /*********************************************************************
-** Program Filename: Menu.hpp
+** Program Filename: main.cpp
 ** Author: Jason Lim
 ** Date: April 15th, 2018
-** Description: This is the header file for Langston's Ant Menu
+** Description: This is program execution for Langston's Ant
 *********************************************************************/
 
-#ifndef MENU_HPP
-#define MENU_HPP
 
 #include <iostream>
-
-using std::cin;
-using std::cout;
-using std::endl;
-
-void displayMenu();
+#include "Menu.hpp"
+#include "inputValidation.hpp"
 
 
-#endif
+int main() {
+    displayMenu();
+    return 0;
+}

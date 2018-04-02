@@ -43,25 +43,7 @@ char charInput()
     return 0;
 }
 
-string stringInput()
-{
-    string text = "";
-    cout << "Enter a string ";
-    if (!(getline(cin, text)))
-    {
-        cout << "Must be a string " << endl;
-        return 0;
-    }
-    if (typeid(text) == typeid(string))
-    {
-        cout << "Valid string input " << endl;
-    }
-    else
-    {
-        cout << "Not a valid string input " << endl;
-    }
-    return 0;
-}
+string stringInput();
 
 int integerInput()
 {
