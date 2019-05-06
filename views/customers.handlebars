@@ -23,5 +23,60 @@
     </div>
 </div>
 </div>
+
 <br>
 <br>
+
+
+  <div>
+  <form action="/products" method="post">
+    <div>
+      <div class="fields">
+        <div class="field">
+          <label>First Name: </label>
+          <input name="cFirstName" type="text" required="required">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Last Name: </label>
+        <input name="cLastName" type="text" required="required" step=".01">
+      </div>
+
+      <div class="field">
+        <label>gender: </label>
+        <input name="gender" type="text" required="required">
+      </div> 
+      <div class="field">
+        <label>Hometown: </label>
+        <input name="hometown" type="text" required="required">
+      </div>
+
+ <button type="submit">Submit</button>
+    </div>
+  </form>
+  </div>
+ <table>
+    <thead>
+      <th>Customer ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Gender</th>
+      <th>Hometown</th>
+    </thead>
+    <tbody>
+      {{#each getProducts}}
+      <tr>
+          <td>{{cid}}</td>
+          <td>{{cFirstName}}</td>
+          <td>{{cLastName}}</td>
+          <td>{{gender}}</td>
+	  <td>{{hometown}}</td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+
+
+</main>
