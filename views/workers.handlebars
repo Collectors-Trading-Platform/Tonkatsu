@@ -1,0 +1,70 @@
+<main>
+
+  <div>
+
+  <form action="/workers" method="post">
+    <div>
+      <div class="fields">
+        <div class="field">
+          <label>First Name: </label>
+          <input name="wFirstName" type="text" required="required">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Last Name: </label>
+        <input name="wLastName" type="text" required="required">
+      </div>
+
+      <div class="field">
+        <label>Job: </label>
+        <input name="job" type="text" required="required">
+      </div>
+      
+      <div class="field">
+        <label>Email: </label>
+        <input name="email" type="text" required="required">
+      </div> 
+      
+      <div class="field">
+        <label>Birthday: </label>
+        <input name="birthday" type="text" required="required">
+     
+     </div>  
+      <div class="field">
+        <label>Location: </label>
+        <input name="location" type="text" required="required">
+      </div>       
+      
+<button type="submit">Submit</button>
+    </div>
+  </form>
+  </div>
+
+  <table>
+    <thead>
+      <th>Worker ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Job</th>
+      <th>Email</th>
+      <th>Birthday</th>
+      <th>Location</th>
+    </thead>
+    <tbody>
+      {{#each getWorkerss}}
+      <tr>
+          <td>{{wid}}</td>
+          <td>{{wFirstName}}</td>
+          <td>{{wLastName}}</td>
+          <td>{{Job}}</td>
+          <td>{{Email}}</td>
+          <td>{{Birthday}}</td>
+          <td>{{Location}}</td>
+          </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+
+</main>
