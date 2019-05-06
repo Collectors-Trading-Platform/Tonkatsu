@@ -139,7 +139,7 @@ CREATE TABLE `workers` (
     `wLastName` varchar(50) NOT NULL,
     `job` varchar(50) NOT NULL,
     `email` varchar(50) NOT NULL,
-    `birthday` DATE,
+    `birthday` DATE NOT NULL,
     `location` varchar(50) NOT NULL
 ) ENGINE=InnoDB;
 
