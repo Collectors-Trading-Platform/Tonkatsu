@@ -1,0 +1,59 @@
+<main>
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item"><a href="/customers">Customers</a></li>
+		<li class="breadcrumb-item"><a href="/products">Products</a></li>
+		<li class="breadcrumb-item"><a href="/workers">Workers</a></li>
+		<li class="breadcrumb-item"><a href="/sections">Sections</a></li>
+		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
+	</ol>
+	<div class="container">
+    <div>
+        <div class="container">
+            <h1 class="display-4">Locations</h1>
+            <p class="lead">Supermarket Tonkatsu Database</p>
+        </div>
+        <ul class="attrlist">
+            <li class="attributes">Location ID</li>
+            <li class="attributes">City</li>
+       </div>
+</div>
+</div>
+<br>
+<br>
+
+  <div>
+
+  <form action="/locations" method="post">
+    <div>
+      <div class="fields">
+        <div class="field">
+          <label>City: </label>
+          <input name="city" type="text" required="required">
+        </div>
+      </div>
+
+        
+<button type="submit">Submit</button>
+    </div>
+  </form>
+  </div>
+
+  <table>
+    <thead>
+      <th>Location ID</th>
+      <th>City</th>
+    </thead>
+    <tbody>
+      {{#each getLocations}}
+      <tr>
+          <td>{{lid}}</td>
+          <td>{city}}</td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+
+</main>
