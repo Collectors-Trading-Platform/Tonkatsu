@@ -1,54 +1,27 @@
-<main>
-
-  <div>
-
-  <form action="/customers" method="post">
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item"><a href="/customers">Customers</a></li>
+		<li class="breadcrumb-item"><a href="/products">Products</a></li>
+		<li class="breadcrumb-item"><a href="/workers">Workers</a></li>
+		<li class="breadcrumb-item"><a href="/sections">Sections</a></li>
+		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
+	</ol>
+	<div class="container">
     <div>
-      <div class="fields">
-        <div class="field">
-          <label>First Name: </label>
-          <input name="cFirstName" type="text" required="required">
+        <div class="container">
+            <h1 class="display-4">Customers</h1>
+            <p class="lead">Supermarket Tonkatsu Database</p>
         </div>
-      </div>
+        <ul class="attrlist">
+            <li class="attributes">customer ID</li>
+            <li class="attributes">First name</li>
+            <li class="attributes">Last name</li>
+            <li class="attributes">Gender</li>
+            <li class="attributes">Hometown</li>
 
-      <div class="field">
-        <label>Last Name: </label>
-        <input name="cLastName" type="text" required="required">
-      </div>
-
-      <div class="field">
-        <label>Gender: </label>
-        <input name="gender" type="text" required="required">
-      </div>
-      <div class="field">
-        <label>Hometown </label>
-        <input name="hometown" type="text" required="required">
-      </div> 
-<button type="submit">Submit</button>
     </div>
-  </form>
-  </div>
-
-  <table>
-    <thead>
-      <th>Customer ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Gender</th>
-      <th>Hometown</th>
-    </thead>
-    <tbody>
-      {{#each getCustomers}}
-      <tr>
-          <td>{{cid}}</td>
-          <td>{{cFirstName}}</td>
-          <td>{{cLastName}}</td>
-          <td>{{gender}}</td>
-	  <td>{{hometown}}</td>
-      </tr>
-      {{/each}}
-
-    </tbody>
-  </table>
-
-</main>
+</div>
+</div>
+<br>
+<br>

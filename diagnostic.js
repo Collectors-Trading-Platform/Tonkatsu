@@ -1,6 +1,5 @@
 var express = require('express');
 var mysql = require('mysql');
-
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var pool = mysql.createPool({
@@ -32,23 +31,25 @@ var selectData = function(res, table) {
 };
 
 app.get('/customers', function(req, res) {
-	selectData(res, 'customerstable');      
+	res.render('customers');//selectData(res, 'customerstable');   
 });
 
 app.get('/products', function(req, res) {
-	selectData(res, 'productstable');
+	res.render('products');
 });
 
 app.get('/workers', function(req, res) {
-	selectData(res, 'workers');
+	res.render('workers');//selectData(res, 'workers');
 });
 
 app.get('/sections', function(req, res) {
-	selectData(res, 'sections');
+	res.render('sections');
+	//selectData(res, 'sections');
 });
 
 app.get('/locations', function(req, res) {
-	selectData(res, 'locations');
+	res.render('locations');
+	//selectData(res, 'locations');
 });
 
 app.use(function(req,res){
