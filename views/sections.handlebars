@@ -1,0 +1,59 @@
+<main>
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item"><a href="/customers">Customers</a></li>
+		<li class="breadcrumb-item"><a href="/products">Products</a></li>
+		<li class="breadcrumb-item"><a href="/workers">Workers</a></li>
+		<li class="breadcrumb-item"><a href="/sections">Sections</a></li>
+		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
+	</ol>
+	<div class="container">
+    <div>
+        <div class="container">
+            <h1 class="display-4">Sections</h1>
+            <p class="lead">Supermarket Tonkatsu Database</p>
+        </div>
+        <ul class="attrlist">
+            <li class="attributes">Section ID</li>
+            <li class="attributes">Name</li>
+       </div>
+</div>
+</div>
+<br>
+<br>
+
+  <div>
+
+  <form action="/sections" method="post">
+    <div>
+      <div class="fields">
+        <div class="field">
+          <label>Name: </label>
+          <input name="sName" type="text" required="required">
+        </div>
+      </div>
+
+        
+<button type="submit">Submit</button>
+    </div>
+  </form>
+  </div>
+
+  <table>
+    <thead>
+      <th>Section ID</th>
+      <th>Name</th>
+    </thead>
+    <tbody>
+      {{#each getSections}}
+      <tr>
+          <td>{{sid}}</td>
+          <td>{sname}}</td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+
+</main>
