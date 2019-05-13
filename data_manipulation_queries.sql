@@ -20,6 +20,10 @@ SELECT * FROM customerstable WHERE cFirstName = :firstname AND cLastName = :last
 -- Find Customers by gender: 
 SELECT * FROM customerstable WHERE gender = :gender;
 
+-- Update Customer information
+UPDATE customerstable SET cFirstName= :fnamenew, cLastName = :lastnamenew, gender = :gendernew, hometown = :townIDnew
+WHERE customerstable.id = :customerIDinput;
+
 -- Remove Customer:
 DELETE FROM customerstable WHERE CID = :cid;
 
@@ -39,6 +43,13 @@ SELECT * FROM productstable WHERE pSection = :pSection;
 
 -- find product by quantity
 SELECT * FROM productstable WHERE quantity = :quantity;
+
+-- Update product information
+UPDATE productstable SET pName = :pNamenew, price = :pricenew, pSection = :sectionnew, quantity = :quantitynew
+WHERE productstable.id = :productIDinput;
+
+-- Remove products
+DELETE FROM productstable WHERE PID=:pid;
 
 --Workers
 -- Add a new worker
@@ -62,6 +73,13 @@ SELECT * FROM workers WHERE birthday = :birthday;
 -- find worker by location
 SELECT * FROM workers WHERE location = :location;
 
+-- Update workers information
+UPDATE workers SET wFirstName = :newfirstname, wLastName = :newlastname, job = :newjob, email = :newemail, birthday = :newbirthday, location = :newlocation
+WHERE workers.id = :workersIDinput;
+
+-- Remove workers
+DELETE FROM workers WHERE WID=:wid;
+
 -- Sections
 -- Add condition:
 INSERT INTO sections (sid, sname)
@@ -70,9 +88,12 @@ VALUES (:sid, :sname);
 -- Search by section name
 SELECT * FROM sections WHERE sname = :sn;
 
+-- Update sections information
+UPDATE sections SET sname = :newsectionname
+WHERE sections.id = :sectionsIDinput;
+
 -- Remove sections
 DELETE FROM sections WHERE SID=:sid;
-
 
 
 -- Locations
@@ -86,6 +107,9 @@ SELECT * FROM locations WHERE city = :city;
 -- Search by location id
 SELECT * FROM locations WHERE lid = :lid;
 
+-- Update locations information
+UPDATE locations SET city = :newcity
+WHERE locations.id = :locationsIDinput;
+
 -- Delete locations
 DELETE FROM locations WHERE lid = :lid;
-

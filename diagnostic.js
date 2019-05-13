@@ -12,7 +12,7 @@ var pool = mysql.createPool({
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 44250);
+app.set('port', 54250);
 
 app.get('/',function(req,res) {
 	res.render('home');

@@ -42,22 +42,18 @@ CREATE TABLE `customerstable` (
 -- cLastName: Douglas
 -- gender: Male
 -- hometown: Orlando
-
 -- cFirstName: Elizabeth
 -- cLastName: Franklin
 -- gender: Female
 -- hometown: Boston
-
 -- cFirstName: Joseph
 -- cLastName: McLaughlin
 -- gender: Male
 -- hometown: Brooklyn
-
 -- cFirstName: Kacy
 -- cLastName: Wong
 -- gender: Female
 -- hometown: San Francisco
-
 -- cFirstName: Derrick
 -- cLastName: Gonzalez
 -- gender: Male
@@ -89,32 +85,26 @@ CREATE TABLE `productstable` (
 -- price - decimal value with 5 precision before and 2 after decimal pt --http://www.java2s.com/Code/SQL/Table-Index/Createtablesmallintdecimalandfloat.htm
 -- pSection - a varchar of maximum length 50, cannot be null
 -- quantity - integer value for quantity of item
-
 -- pName - Teddy Bear
 -- price - 10.50
 -- pSection - toys
 -- quantity - 50
-
 -- pName - Dumplings pack of 24
 -- price - 5.50
 -- pSection - frozen foods
 -- quantity - 35
-
 -- pName - Laundry Basket
 -- price - 12.75
 -- pSection - Household goods
 -- quantity - 15
-
 -- pName - Pepsi 8 oz
 -- price - .99
 -- pSection - drinks
 -- quantity - 5
-
 -- pName - Lego Star Wars SET
 -- price - 120.90
 -- pSection - toys
 -- quantity - 1
-
 -- pName - Vintage Game of Thrones Pop Vinyl
 -- price - 12.99
 -- pSection - collectibles
@@ -151,35 +141,30 @@ CREATE TABLE `workers` (
 -- email - a varchar of maximum length 50, cannot be null
 -- birthday - a date day/month/year
 -- location - a varchar of maximum length 50, cannot be null
-
 -- wFirstName - Fred
 -- wLastName - Smith
 -- job - Cashier
 -- email - fred.smith@yahoo.com
 -- birthday - 04/1/1975
 -- location - San Francisco
-
 -- wFirstName - Kenneth
 -- wLastName - Chang
 -- job - Stocker
 -- email - ken.chang@hotmail.com
 -- birthday - 23/3/1996
 -- location - Orlando
-
 -- wFirstName - Mike
 -- wLastName - Rodriguez
 -- job - cashier
 -- email - m.rodriguez@gmail.com
 -- birthday - 06/6/1989
 -- location - Boston
-
 -- wFirstName - Sally
 -- wLastName - Benedict
 -- job - stocker
 -- email - sally.benedict@gmail.com
 -- birthday - 02/5/1979
 -- location - Los Angeles
-
 -- wFirstName - Lisa
 -- wLastName - Jordan
 -- job - cashier
@@ -187,9 +172,9 @@ CREATE TABLE `workers` (
 -- birthday - 27/7/1965
 -- location - Brooklyn
 */
-INSERT INTO `workers` (wFirstName, wLastName, job, email, birthday, location) VALUES ('Fred', 'Smith', 'Cashier', 'fred.smith@yahoo.com', '04/1/1975', 'San Francisco'),
-('Kenneth', 'Chang', 'Stocker', 'ken.chang@hotmail.com', '23/3/1996', 'Orlando'), ('Mike', 'Rodriguez', 'Cashier', 'm.rodriguez@gmail.com', '06/6/1989', 'Boston'),
-('Sally', 'Benedict', 'Stocker', 'sally.benedict@gmail.com', '02/5/1979', 'Los Angeles'), ('Lisa', 'Jordan', 'Cashier', 'lisa.jordan@sbcglobal.net', '27/7/1965', 'Brooklyn');
+INSERT INTO `workers` (wFirstName, wLastName, job, email, birthday, location) VALUES ('Fred', 'Smith', 'Cashier', 'fred.smith@yahoo.com', '1975-04-01', 'San Francisco'),
+('Kenneth', 'Chang', 'Stocker', 'ken.chang@hotmail.com', '1996-03-23', 'Orlando'), ('Mike', 'Rodriguez', 'Cashier', 'm.rodriguez@gmail.com', '1989-06-06', 'Boston'),
+('Sally', 'Benedict', 'Stocker', 'sally.benedict@gmail.com', '1979-02-05', 'Los Angeles'), ('Lisa', 'Jordan', 'Cashier', 'lisa.jordan@sbcglobal.net', '1965-07-27', 'Brooklyn');
 
 /*
 -- Create a table called sections with the following properties:
@@ -198,7 +183,10 @@ INSERT INTO `workers` (wFirstName, wLastName, job, email, birthday, location) VA
 */
 CREATE TABLE `sections` (
     `sid` int AUTO_INCREMENT PRIMARY KEY,
-    `sname` varchar(50) NOT NULL
+    `sname` varchar(50) NOT NULL,
+    KEY `sid` (`sid`),
+    FOREIGN KEY (`sid`) REFERENCES `workers`(`wid`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`sid`) REFERENCES `productstable`(`pid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 /*
 -- insert the following into sections table:
@@ -215,7 +203,9 @@ INSERT INTO `sections` (sname) VALUES ('Toys'), ('collectibles'), ('drinks'), ('
 
 CREATE TABLE `locations` (
     `lid` int AUTO_INCREMENT PRIMARY KEY,
-    `city` varchar(50) NOT NULL
+    `city` varchar(50) NOT NULL,
+    KEY `lid` (`lid`),
+    FOREIGN KEY (`lid`) REFERENCES `workers`(`wid`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB;
 /*
 -- insert the following into the locations table:
@@ -232,8 +222,9 @@ INSERT INTO `locations` (city) VALUES ('Brooklyn'), ('Boston'), ('San Francisco'
 -- The primary key is a combination of customer_id and product_id
 */
 CREATE TABLE `customer_product` (
-    `customer_id` int PRIMARY KEY,
+    `customer_id` int,
     `product_id` int,
+    PRIMARY KEY (`customer_id`, `product_id`),
     KEY `customer_id` (`customer_id`),
     FOREIGN KEY (`customer_id`) REFERENCES `customerstable`(`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
     KEY `product_id` (`product_id`),
