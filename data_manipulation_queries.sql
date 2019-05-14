@@ -74,7 +74,7 @@ SELECT * FROM workers WHERE birthday = :birthday;
 SELECT * FROM workers WHERE location = :location;
 
 -- Update workers information
-UPDATE workers SET wFirstName = :newfirstname, wLastName = :newlastname, job = :newjob, email = :newemail, birthday = :newbirthday, location = :newlocation
+UPDATE workers SET wFirstName = :newfirstname, wLastName = :newlastname, job = :newjob, email = :newemail, birthday = :newbirthday, location = :newlocation, wSection = :newWSection
 WHERE workers.id = :workersIDinput;
 
 -- Remove workers
@@ -139,5 +139,3 @@ GROUP BY cFirstname;
 SELECT cFirstname, cLastname, Count(product_id) as itemsPurchased FROM customerstable as c 
 INNER JOIN customer_product as cp on c.cid = cp.customer_id
 GROUP BY cFirstName;
-
-
