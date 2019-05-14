@@ -117,17 +117,27 @@ DELETE FROM locations WHERE lid = :lid;
 
 -- Display info Queries
 -- Display all customers
-SELECT cid, cFirstname, cLastname, gender, hometown FROM customerstable
+SELECT cid, cFirstname, cLastname, gender, hometown FROM customerstable;
 
 -- Display the price of all items
-select pName, price from productstable
+select pName, price from productstable;
 
--- Display the customers' purchases
-SELECT cFirstname, cLastname, pName as productPurchased FROM customerstable as c 
+-- Display the customers' purchases and the quantity purchased 
+SELECT cFirstname, cLastname, pName as productPurchased, COUNT(pName) as quantity FROM customerstable as c 
 INNER JOIN customer_product as cp on c.cid = cp.customer_id
 INNER JOIN productstable as p on cp.product_id = p.pid
+GROUP BY productPurchased;
 
--- Display the number of items each custmer purchased
+-- Display the total each customer has spent on products purchased
+SELECT cFirstname, cLastname, SUM(price) as totalSpent FROM customerstable as c 
+INNER JOIN customer_product as cp on c.cid = cp.customer_id
+INNER JOIN productstable as p on cp.product_id = p.pid
+GROUP BY cFirstname;
+
+
+-- Display the number of items each customer purchased
 SELECT cFirstname, cLastname, Count(product_id) as itemsPurchased FROM customerstable as c 
 INNER JOIN customer_product as cp on c.cid = cp.customer_id
-GROUP BY cFirstName
+GROUP BY cFirstName;
+
+
