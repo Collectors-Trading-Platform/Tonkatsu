@@ -239,3 +239,4 @@ INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from 
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Elizabeth" && cLastName = "Franklin"), (select pid from productstable where pName = "Pepsi 8 oz"));
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Elizabeth" && cLastName = "Franklin"), (select pid from productstable where pName = "Teddy Bear"));
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Joseph" && cLastName = "McLaughlin"), (select pid from productstable where pName = "Lego Star Wars Set"));
+INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Elizabeth" && cLastName = "Franklin"), (select pid from productstable where pName = "Pepsi 8 oz"));
