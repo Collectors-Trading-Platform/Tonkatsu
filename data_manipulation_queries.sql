@@ -113,3 +113,21 @@ WHERE locations.id = :locationsIDinput;
 
 -- Delete locations
 DELETE FROM locations WHERE lid = :lid;
+
+
+-- Display info Queries
+-- Display all customers
+SELECT cid, cFirstname, cLastname, gender, hometown FROM customerstable
+
+-- Display the price of all items
+select pName, price from productstable
+
+-- Display the customers' purchases
+SELECT cFirstname, cLastname, pName as productPurchased FROM customerstable as c 
+INNER JOIN customer_product as cp on c.cid = cp.customer_id
+INNER JOIN productstable as p on cp.product_id = p.pid
+
+-- Display the number of items each custmer purchased
+SELECT cFirstname, cLastname, Count(product_id) as itemsPurchased FROM customerstable as c 
+INNER JOIN customer_product as cp on c.cid = cp.customer_id
+GROUP BY cFirstName
