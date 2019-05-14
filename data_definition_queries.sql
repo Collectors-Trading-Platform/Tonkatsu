@@ -183,10 +183,7 @@ INSERT INTO `workers` (wFirstName, wLastName, job, email, birthday, location) VA
 */
 CREATE TABLE `sections` (
     `sid` int AUTO_INCREMENT PRIMARY KEY,
-    `sname` varchar(50) NOT NULL,
-    KEY `sid` (`sid`),
-    FOREIGN KEY (`sid`) REFERENCES `workers`(`wid`) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (`sid`) REFERENCES `productstable`(`pid`) ON DELETE CASCADE ON UPDATE CASCADE
+    `sname` varchar(50) NOT NULL
 ) ENGINE=InnoDB;
 /*
 -- insert the following into sections table:
@@ -203,9 +200,7 @@ INSERT INTO `sections` (sname) VALUES ('Toys'), ('collectibles'), ('drinks'), ('
 
 CREATE TABLE `locations` (
     `lid` int AUTO_INCREMENT PRIMARY KEY,
-    `city` varchar(50) NOT NULL,
-    KEY `lid` (`lid`),
-    FOREIGN KEY (`lid`) REFERENCES `workers`(`wid`) ON DELETE CASCADE ON UPDATE CASCADE
+    `city` varchar(50) NOT NULL
     ) ENGINE=InnoDB;
 /*
 -- insert the following into the locations table:
@@ -222,14 +217,31 @@ INSERT INTO `locations` (city) VALUES ('Brooklyn'), ('Boston'), ('San Francisco'
 */
 CREATE TABLE `customer_product` (
     `customer_id` int,
-    `product_id` int,
-    KEY `customer_id` (`customer_id`),
-    FOREIGN KEY (`customer_id`) REFERENCES `customerstable`(`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
-    KEY `product_id` (`product_id`),
-    FOREIGN KEY (`product_id`) REFERENCES `productstable`(`pid`) ON DELETE CASCADE ON UPDATE CASCADE
+    `product_id` int
 ) ENGINE=InnoDB;
 
-SET FOREIGN_KEY_CHECKS = 1;
+
+
+--
+-- Constraints for table `sections`
+--
+ALTER TABLE `sections`
+  ADD CONSTRAINT `sections1` FOREIGN KEY (`sid`) REFERENCES `workers`(`wid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sections2` FOREIGN KEY (`sid`) REFERENCES `productstable`(`pid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
+--
+-- Constraints for table `locations`
+--
+ALTER TABLE `locations`
+  ADD CONSTRAINT `locations1` FOREIGN KEY (`lid`) REFERENCES `workers`(`wid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--
+-- Constraints for table `customer_product
+--
+ALTER TABLE `customer_product`
+  ADD CONSTRAINT `custProduct1` FOREIGN KEY (`customer_id`) REFERENCES  `customerstable`(`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `custProduct2` FOREIGN KEY (`product_id`) REFERENCES `productstable`(`pid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*
 -- insert the following into the customer_product table:
@@ -240,3 +252,5 @@ INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from 
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Elizabeth" && cLastName = "Franklin"), (select pid from productstable where pName = "Teddy Bear"));
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Joseph" && cLastName = "McLaughlin"), (select pid from productstable where pName = "Lego Star Wars Set"));
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Elizabeth" && cLastName = "Franklin"), (select pid from productstable where pName = "Pepsi 8 oz"));
+
+SET FOREIGN_KEY_CHECKS = 1;
