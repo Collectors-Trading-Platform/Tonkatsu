@@ -219,12 +219,10 @@ INSERT INTO `locations` (city) VALUES ('Brooklyn'), ('Boston'), ('San Francisco'
 -- between customerstable and productstable,
 -- customer_id - an integer which is a foreign key reference to customerstable cid
 -- product_id - an integer which is a foreign key reference to productstable pid
--- The primary key is a combination of customer_id and product_id
 */
 CREATE TABLE `customer_product` (
     `customer_id` int,
     `product_id` int,
-    PRIMARY KEY (`customer_id`, `product_id`),
     KEY `customer_id` (`customer_id`),
     FOREIGN KEY (`customer_id`) REFERENCES `customerstable`(`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
     KEY `product_id` (`product_id`),
@@ -240,3 +238,4 @@ INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from 
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Joseph" && cLastName = "McLaughlin"), (select pid from productstable where pName = "Lego Star Wars Set"));
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Elizabeth" && cLastName = "Franklin"), (select pid from productstable where pName = "Pepsi 8 oz"));
 INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Elizabeth" && cLastName = "Franklin"), (select pid from productstable where pName = "Teddy Bear"));
+INSERT INTO customer_product (customer_id, product_id) VALUES ((select cid from customerstable where cFirstName = "Joseph" && cLastName = "McLaughlin"), (select pid from productstable where pName = "Lego Star Wars Set"));
