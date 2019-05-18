@@ -74,7 +74,7 @@ SELECT * FROM workers WHERE birthday = :birthday;
 SELECT * FROM workers WHERE location = :location;
 
 -- Update workers information
-UPDATE workers SET wFirstName = :newfirstname, wLastName = :newlastname, job = :newjob, email = :newemail, birthday = :newbirthday, location = :newlocation
+UPDATE workers SET wFirstName = :newfirstname, wLastName = :newlastname, job = :newjob, email = :newemail, birthday = :newbirthday, location = :newlocation, wSection = :newWSection
 WHERE workers.id = :workersIDinput;
 
 -- Remove workers
@@ -113,3 +113,46 @@ WHERE locations.id = :locationsIDinput;
 
 -- Delete locations
 DELETE FROM locations WHERE lid = :lid;
+
+
+-- Display info Queries
+-- Display all customers and their information
+SELECT * FROM customerstable;
+
+-- Display all items and their information
+SELECT pid, pName, price, sections.sName, quantity from productstable INNER JOIN
+sections ON pSection = sections.sid;
+
+-- Display all workers and their information
+SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city from workers INNER JOIN
+locations ON location = locations.lid;
+
+-- Display all sections
+SELECT * from sections;
+
+-- Display all locations
+SELECT * from locations;
+
+-- Display the price of all items
+select pName, price from productstable;
+
+
+
+-- Display the customers' purchases and the quantity purchased 
+SELECT cFirstname, cLastname, pName as productPurchased, COUNT(pName) as quantity FROM customerstable as c 
+INNER JOIN customer_product as cp on c.cid = cp.customer_id
+INNER JOIN productstable as p on cp.product_id = p.pid
+GROUP BY productPurchased;
+
+
+
+-- Display the number of items each customer purchased
+SELECT cFirstname, cLastname, Count(product_id) as itemsPurchased FROM customerstable as c 
+INNER JOIN customer_product as cp on c.cid = cp.customer_id
+GROUP BY cFirstName;
+
+
+-- display the number of items in each section
+SELECT sName, COUNT(pName) as quanitity FROM sections
+INNER JOIN productstable as products on sections.sid = products.pid
+GROUP BY pid;
