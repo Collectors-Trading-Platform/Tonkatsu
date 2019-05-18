@@ -3,7 +3,8 @@ module.exports = function(){
     var router = express.Router();
 
     function getCustomers(res, mysql, context, complete){
-        mysql.pool.query("SELECT customersid as cid, name FROM customerstable", function(error, results, fields){
+        mysql.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
+
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -16,8 +17,8 @@ module.exports = function(){
 router.post('/', function(req, res){
         console.log(req.body)
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO customerstable (cFirstName, cLastName, gender, hometown) VALUES (?,?,?,?)";
-        var inserts = [req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown];
+        var sql = "INSERT INTO customerstable (cid, cFirstName, cLastName, gender, hometown) VALUES (?,?,?,?,?)";
+        var inserts = [req.body.cid, req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))

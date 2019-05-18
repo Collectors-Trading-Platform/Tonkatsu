@@ -1,6 +1,7 @@
 var express = require('express');
 var mysql = require('mysql');
 var app = express();
+var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var pool = mysql.createPool({
 	host: 'classmysql.engr.oregonstate.edu',
@@ -13,10 +14,28 @@ var pool = mysql.createPool({
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 22250);
-app.use('/customers', require('./supermarket.js'))
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+app.use('/customers', require('./supermarket.js'));
 app.use('/', express.static('public'));
 
-;
+
+app.get('/reset-table',function(req,res,next){
+  var context = {};
+  mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
+    var createString = "CREATE TABLE customerstable("+
+    "cid INT PRIMARY KEY AUTO_INCREMENT,"+
+    "cFirstName VARCHAR(50) NOT NULL,"+
+    "cLastName VARCHAR(50) NOT NULL,"+
+    "gender VARCHAR(50) NOT NULL,"+
+    "hometown VARCHAR(50) NOT NULL)";
+    mysql.pool.query(createString, function(err){
+      context.results = "Table reset";
+      res.render('reset',context);
+    })
+  });
+});
+
 app.get('/',function(req,res) {
 	res.render('home');
 });
