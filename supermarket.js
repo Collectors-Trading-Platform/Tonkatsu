@@ -1,7 +1,6 @@
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
-
     function getCustomers(res, mysql, context, complete){
         mysql.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
 
@@ -26,6 +25,7 @@ router.post('/', function(req, res){
                 res.end();
             }else{
                 res.redirect('/customers');
+
             }
         });
     });
