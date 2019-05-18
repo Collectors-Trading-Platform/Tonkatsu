@@ -30,34 +30,34 @@
 
 
   <div>
-  <form action="/products" method="post">
+  <form action="/customers" method="post">
     <div>
       <div class="fields">
         <div class="field">
           <label>First Name: </label>
-          <input name="cFirstName" type="text" required="required">
+          <input name="cFirstName" type="text">
         </div>
       </div>
 
       <div class="field">
         <label>Last Name: </label>
-        <input name="cLastName" type="text" required="required" step=".01">
+        <input name="cLastName" type="text">
       </div>
 
       <div class="field">
         <label>gender: </label>
-        <input name="gender" type="text" required="required">
+        <input name="gender" type="text">
       </div> 
       <div class="field">
         <label>Hometown: </label>
-        <input name="hometown" type="text" required="required">
+        <input name="hometown" type="text">
       </div>
 
  <button type="submit">Submit</button>
 
 	<div class="field">
 	 <label>Customer ID: </label>
-	 <input name="customerID" type="number" required="required">
+	 <input name="customerID" type="number">
 	</div>
 	<button type="button">Delete</button>
 	<button type="button">Update</button>
@@ -74,7 +74,7 @@
       <th>Hometown</th>
     </thead>
     <tbody>
-      {{#each getProducts}}
+      {{#each getCustomers}}
       <tr>
           <td>{{cid}}</td>
           <td>{{cFirstName}}</td>

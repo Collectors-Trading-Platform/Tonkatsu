@@ -12,8 +12,11 @@ var pool = mysql.createPool({
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 54250);
+app.set('port', 22250);
+app.use('/customers', require('./supermarket.js'))
+app.use('/', express.static('public'));
 
+;
 app.get('/',function(req,res) {
 	res.render('home');
 });
