@@ -53,8 +53,8 @@ module.exports = function(){
 router.post('/', function(req, res){
         console.log(req.body)
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO customerstable (cid, cFirstName, cLastName, gender, hometown) VALUES (?,?,?,?,?)";
-        var inserts = [req.body.cid, req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown];
+        var sql = "INSERT INTO customerstable (cFirstName, cLastName, gender, hometown) VALUES (?,?,?,?,?)";
+        var inserts = [req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
@@ -65,8 +65,6 @@ router.post('/', function(req, res){
             }
         });
     });
-return router;
-}();
 
 
 app.get('/',function(req,res) {
@@ -121,3 +119,5 @@ app.use(function(err, req, res, next){
 app.listen(app.get('port'), function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
+return router
+}();

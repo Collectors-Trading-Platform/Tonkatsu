@@ -2,7 +2,7 @@
   "name": "finalproject",
   "version": "1.0.0",
   "description": "Project database Tonkatsu Supermarket CS340",
-  "main": "project.js",
+  "main": "diagnostic.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
