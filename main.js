@@ -12,8 +12,15 @@ app.set('view engine', 'handlebars');
 app.set('port', 22255);
 app.set('mysql', mysql);
 app.use('/workers', require('./workers.js'));
+app.use('/products', require('./products.js'));
+app.use('/customers', require('./customers.js'));
 app.use('/locations', require('./locations.js'));
+app.use('/sections', require('./sections.js'));
 app.use('/', express.static('public'));
+
+app.get('/',function(req,res) {
+	res.render('home');
+});
 
 app.use(function(req,res){
   res.status(404);
