@@ -1,0 +1,101 @@
+<main>
+<script src="/public/deleteCustomer.js"></script>
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item"><a href="/customers">Customers</a></li>
+		<li class="breadcrumb-item"><a href="/products">Products</a></li>
+		<li class="breadcrumb-item"><a href="/workers">Workers</a></li>
+		<li class="breadcrumb-item"><a href="/sections">Sections</a></li>
+		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
+	</ol>
+	<div class="container">
+    <div>
+        <div class="container">
+            <h1 class="display-4">Customers</h1>
+            <p class="lead">Supermarket Tonkatsu Database</p>
+        </div>
+        <ul class="attrlist">
+            <li class="attributes">Customer ID</li>
+            <li class="attributes">First name</li>
+            <li class="attributes">Last name</li>
+            <li class="attributes">Gender</li>
+            <li class="attributes">Hometown</li>
+
+    </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+
+  <div>
+  <form id="addcustomer" action="/customers" method="post">
+    <div>
+      <div class="fields">
+        <div class="field">
+          <label>First Name: </label>
+          <input type="text" name="cFirstName">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Last Name: </label>
+        <input type="text" name="cLastName">
+      </div>
+
+      <div class="field">
+        <label>gender: </label>
+        <input type="text" name="gender">
+      </div> 
+      <div class="field">
+        <label>Hometown: </label>
+        <select name="hometown">
+            <option value="Brooklyn">Brooklyn</option>
+            <option value="SF">San Francisco</option>
+            <option value="LA">Los Angeles</option>
+            <option value="Boston">Boston</option>
+            <option value="Orl">Orlando</option>
+        </select>
+      </div>
+    <div>
+ <input type="submit" value="Submit">
+
+</form>
+</div>
+<div>
+<form>
+	<div class="field">
+	 <label>Customer ID: </label>
+	 <input name="customerID" type="number">
+	</div>
+	<button onclick="deleteCustomer">Delete</button>
+	<button type="button">Update</button>
+	<button type="button">Search</button>
+  </form>
+   </div>
+ <table>
+    <thead>
+      <th>Customer ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Gender</th>
+      <th>Hometown</th>
+    </thead>
+    <tbody>
+      {{#each getCustomers}}
+      <tr>
+          <td>{{cid}}</td>
+          <td>{{cFirstName}}</td>
+          <td>{{cLastName}}</td>
+          <td>{{gender}}</td>
+	  <td>{{hometown}}</td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+
+
+</main>

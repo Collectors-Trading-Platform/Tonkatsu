@@ -1,0 +1,106 @@
+<main>
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item"><a href="/customers">Customers</a></li>
+		<li class="breadcrumb-item"><a href="/products">Products</a></li>
+		<li class="breadcrumb-item"><a href="/workers">Workers</a></li>
+		<li class="breadcrumb-item"><a href="/sections">Sections</a></li>
+		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
+	</ol>
+	<div class="container">
+    <div>
+        <div class="container">
+            <h1 class="display-4">Workers</h1>
+            <p class="lead">Supermarket Tonkatsu Database</p>
+        </div>
+        <ul class="attrlist">
+            <li class="attributes">Worker ID</li>
+            <li class="attributes">First name</li>
+            <li class="attributes">Last name</li>
+            <li class="attributes">Job</li>
+            <li class="attributes">Email</li>
+            <li class="attributes">Birthday</li>
+            <li class="attributes">Location</li>
+
+    </div>
+</div>
+</div>
+<br>
+<br>
+
+  <div>
+
+  <form action="/workers" method="post">
+    <div>
+      <div class="fields">
+        <div class="field">
+          <label>First Name: </label>
+          <input name="wFirstName" type="text" required="required">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Last Name: </label>
+        <input name="wLastName" type="text" required="required">
+      </div>
+
+      <div class="field">
+        <label>Job: </label>
+        <input name="job" type="text" required="required">
+      </div>
+      
+      <div class="field">
+        <label>Email: </label>
+        <input name="email" type="text" required="required">
+      </div> 
+      
+      <div class="field">
+        <label>Birthday: </label>
+        <input name="birthday" type="date" required="required">
+     
+     </div>  
+      <div class="field">
+        <label>Location: </label>
+        <input name="location" type="text" required="required">
+      </div>       
+      
+<button type="submit">Submit</button>
+	<div class ="field">
+	 <label>Worker ID: </label>
+	 <input name="workerid" type="number" required="required">
+	</div>
+	<button type="button">Delete</button>
+	<button type="button">Update</button>
+	<button type="button">Search</button>
+    </div>
+  </form>
+  </div>
+
+  <table>
+    <thead>
+      <th>Worker ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Job</th>
+      <th>Email</th>
+      <th>Birthday</th>
+      <th>Location</th>
+    </thead>
+    <tbody>
+      {{#each workers}}
+      <tr>
+          <td>{{wid}}</td>
+          <td>{{wFirstName}}</td>
+          <td>{{wLastName}}</td>
+          <td>{{job}}</td>
+          <td>{{email}}</td>
+          <td>{{birthday}}</td>
+          <td>{{location}}</td>
+          </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+
+</main>
