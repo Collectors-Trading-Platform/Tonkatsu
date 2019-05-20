@@ -4,7 +4,7 @@ module.exports = function(){
 
 
 function getWorkers(res, mysql, context, complete){
-        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city from workers INNER JOIN locations ON location = locations.lid",
+        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, location, wSection from workers",
 	 function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -34,7 +34,7 @@ router.get('/', function(req, res){
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');
-var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,?,?)";
+var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,(select lid from locations where city = 'San Francisco'),(select sid from sections where sname = 'Checkout'))";
 var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email, req.body.birthday, req.body.location, req.body.wSection];
 sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     if(error){
