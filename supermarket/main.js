@@ -9,9 +9,13 @@ app.engine('handlebars', handlebars.engine);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
-app.set('port', 22255);
+app.set('port', 22256);
 app.set('mysql', mysql);
 app.use('/workers', require('./workers.js'));
+app.use('/products', require('./products.js'));
+app.use('/customers', require('./customers.js'));
+app.use('/locations', require('./locations.js'));
+app.use('/sections', require('./sections.js'));
 app.use('/', express.static('public'));
 
 app.use(function(req,res){
