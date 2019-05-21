@@ -13,7 +13,6 @@ function getLocations(res, mysql, context, complete){
         });
  }
 
-
 function getWorkers(res, mysql, context, complete){
         mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid", function(error, results, fields){
             if(error){
@@ -47,7 +46,7 @@ function getWorkersByLocation(req, res, mysql, context, complete){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["filterworkers.js"];
+        context.jsscripts = ["./filterworkers.js"];
         var mysql = req.app.get('mysql');
         getWorkers(res, mysql, context, complete);
         getLocations(res, mysql, context, complete);
@@ -65,17 +64,16 @@ function getWorkersByLocation(req, res, mysql, context, complete){
     router.get('/filter/:location', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["filterworkers.js"];
+        context.jsscripts = ["./filterworkers.js"];
         var mysql = req.app.get('mysql');
         getWorkersByLocation(req, res, mysql, context, complete);
         getLocations(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+	    if (callbackCount >= 2){
                 res.render('workers', context);
             }
-
-        }
+	}
     });
 router.post('/', function(req, res){
 console.log(req.body)
