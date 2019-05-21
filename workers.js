@@ -2,10 +2,20 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+function getLocations(res, mysql, context, complete){
+        mysql.pool.query("SELECT lid, city FROM locations", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.locations = results;
+            complete();
+        });
+ }
+
 
 function getWorkers(res, mysql, context, complete){
-        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, location, wSection from workers",
-	 function(error, results, fields){
+        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -13,24 +23,60 @@ function getWorkers(res, mysql, context, complete){
             context.workers = results;
             complete();
         });
-    }
+}
 
 
-router.get('/', function(req, res){
+function getWorkersByLocation(req, res, mysql, context, complete){
+      var query = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN sections ON wSection = sections.sid INNER JOIN locations ON location = locations.lid WHERE location = ?";
+      console.log(req.params)
+      var inserts = [req.params.location]
+      mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.workers = results;
+            complete();
+        });
+}
+
+  
+
+  /*Display all workers. Requires web based javascript to delete users with AJAX*/
+
+    router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-       // context.jsscripts = ["deleteperson.js","filterpeople.js","searchpeople.js"];
+        context.jsscripts = ["filterworkers.js"];
         var mysql = req.app.get('mysql');
         getWorkers(res, mysql, context, complete);
+        getLocations(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('workers', context);
             }
 
         }
     });
-    
+
+ 
+ /*Display all workers from a given location. Requires web based javascript to delete users with AJAX*/
+    router.get('/filter/:location', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["filterworkers.js"];
+        var mysql = req.app.get('mysql');
+        getWorkersByLocation(req, res, mysql, context, complete);
+        getLocations(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('workers', context);
+            }
+
+        }
+    });
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');
@@ -48,3 +94,4 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
 });
 return router;
 }();
+
