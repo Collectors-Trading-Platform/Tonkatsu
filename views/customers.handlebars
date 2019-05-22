@@ -37,13 +37,10 @@
           <label>First Name: </label>
           <input type="text" name="cFirstName">
         </div>
-      </div>
-
       <div class="field">
         <label>Last Name: </label>
         <input type="text" name="cLastName">
       </div>
-
       <div class="field">
         <label>gender: </label>
         <input type="text" name="gender">
@@ -58,11 +55,10 @@
             <option value="Orl">Orlando</option>
         </select>
       </div>
-    <div>
+    </div>
+</div>
  <input type="submit" value="Submit">
-
 </form>
-
 </div>
 <form id='filter_customers' action='/filter/:hometown' method='get'>
 <!--- this form does not submit directly, the button handles all the interaction with backend -->
@@ -75,12 +71,10 @@
     <input type="button" value="Filter" onclick="filterCustomersByHometown()">
 </form>
 <div>
-<form>
-	<div class="field">
-	 <label>Customer First Name: </label>
-	 <input name="customerFirstName" type="text">
-	</div>
-	<button type="button">Search</button>
+<form id='search_customer' action='/search/:s' method='get'>
+	 <label>Search by Customer First Name: </label>
+	 <input id='first_name_search_string' type="text" name='first_name_search_string' value=''>
+	<input type="button" value="Search" onclick="searchCustomerByFirstName()">
   </form>
    </div>
  <table>
@@ -99,7 +93,7 @@
           <td>{{cLastName}}</td>
           <td>{{gender}}</td>
 	  <td>{{hometown}}</td>
-	  <td><button onclick="deleteCustomer()">Delete</button></td>
+	  <td><button onclick="deleteCustomer({{cid}})">Delete</button></td>
 	  <td><button>Update</button></td>
       </tr>
       {{/each}}

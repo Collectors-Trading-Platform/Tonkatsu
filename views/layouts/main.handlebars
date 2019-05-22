@@ -2,9 +2,15 @@
 <html>
 <head>
 	<title>Team Tonkatsu 340 Project - Spring 2019</title>
-	  <link rel="stylesheet" type="text/css" href="./main.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	
+  <link rel="stylesheet" type="text/css" href="./main.css" />
 </head>
 <body>
+	{{#each jsscripts}}
+	<script src="/{{this}}"></script>
+	{{/each}}
 	<script src="./filtercustomers.js"></script>
 	<script src="./deleteCustomer.js"></script>
 	<script src="./filterworkers.js"></script>
