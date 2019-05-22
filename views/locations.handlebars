@@ -37,11 +37,9 @@
         
 <button type="submit">Submit</button>
 	<div class="field">
-	 <label>Location ID: </label>
-	 <input name="locationid" type="number">
+	 <label>City: </label>
+	 <input name="locationCity" type="number">
 	</div>
-	<button type="button">Delete</button>
-	<button type="button">Update</button>
 	<button type="button">Search</button>
     </div>
   </form>
@@ -57,6 +55,8 @@
       <tr>
           <td>{{lid}}</td>
           <td>{{city}}</td>
+	  <td><button>Delete</button></td>
+	  <td><button>Update</button></td>
       </tr>
       {{/each}}
 

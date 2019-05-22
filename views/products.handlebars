@@ -55,11 +55,9 @@
 
  <button type="submit">Submit</button>
 	<div class="field">
-	 <label>Product ID: </label>
-	 <input name="productid" type="number">
+	 <label>Product Name: </label>
+	 <input name="productName" type="number">
 	</div>
-	<button type="button">Delete</button>
-	<button type="button">Update</button>
 	<button type="button">Search</button>
     </div>
   </form>
@@ -80,6 +78,8 @@
           <td>{{price}}</td>
           <td>{{pSection}}</td>
 	  <td>{{quantity}}</td>
+	  <td><button>Delete</button></td>
+	  <td><button>Update</button></td>
       </tr>
       {{/each}}
 

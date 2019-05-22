@@ -37,11 +37,9 @@
         
 <button type="submit">Submit</button>
 	<div class="field">
-	 <label>Section ID: </label>
-	 <input name="sectionid" type="number">
+	 <label>Section Name: </label>
+	 <input name="sectionName" type="number">
 	</div>
-	<button type="button">Delete</button>
-	<button type="button">Update</button>
 	<button type="button">Search</button>
     </div>
   </form>
@@ -57,6 +55,8 @@
       <tr>
           <td>{{sid}}</td>
           <td>{{sname}}</td>
+	  <td><button>Delete</button></td>
+	  <td><button>Update</button></td>
       </tr>
       {{/each}}
 

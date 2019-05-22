@@ -9,7 +9,7 @@ app.engine('handlebars', handlebars.engine);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
-app.set('port', 25255);
+app.set('port', 35255);
 app.set('mysql', mysql);
 app.use('/workers', require('./workers.js'));
 app.use('/products', require('./products.js'));

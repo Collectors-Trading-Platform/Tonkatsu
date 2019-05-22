@@ -73,7 +73,7 @@
       
 <button type="submit">Submit</button>
 <br/>
-<form id='filter_workers' action='/' method='get'>
+<form id='filter_workers' action='/filter/:location' method='get'>
 <!--- this form does not submit directly, the button handles all the interaction with backend -->
     <label> Filter by location </label>
     <select id='locations_filter' name="location"> 
@@ -85,10 +85,10 @@
 </form>
 
     <div class ="field">
-	 <label>Worker ID: </label>
+	 <label>Worker First Name: </label>
 	 <input name="workerid" type="number">
 	</div>
-	<button type="button">Search</button>
+	<button type="button" value="Search" onclick="searchWorkersByName()">Search</button>
     </div>
   </form>
   </div>
