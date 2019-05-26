@@ -43,7 +43,10 @@
       </div>
       <div class="field">
         <label>gender: </label>
-        <input type="text" name="gender">
+	<select name="gender">
+		<option value="Male">Male</option>
+		<option value="Female">Female</option>
+	</select>
       </div> 
       <div class="field">
         <label>Hometown: </label>
@@ -93,7 +96,7 @@
           <td>{{cLastName}}</td>
           <td>{{gender}}</td>
 	  <td>{{hometown}}</td>
-	  <td><button onclick="deleteCustomer({{cid}})">Delete</button></td>
+	  <td><button onclick="deleteCustomer({{id}})">Delete</button></td>
 	  <td><button>Update</button></td>
       </tr>
       {{/each}}

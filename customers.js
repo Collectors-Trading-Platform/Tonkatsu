@@ -83,6 +83,25 @@ router.get('/search/:s', function(req, res){
         }
     });
 
+   /* Display one person for the specific purpose of updating people */
+
+    router.get('/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+     //   context.jsscripts = ["selectedcustomer.js", "updatecustomer.js"];
+        var mysql = req.app.get('mysql');
+        getPerson(res, mysql, context, req.params.id, complete);
+        getPlanets(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('update-customer', context);
+            }
+
+        }
+    });
+
+
 
 router.post('/', function(req, res){
 console.log(req.body)
