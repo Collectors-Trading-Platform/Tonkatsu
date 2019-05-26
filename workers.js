@@ -57,7 +57,7 @@ function getWorkersWithNameLike(req, res, mysql, context, complete){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["./filterworkers.js"];
+        context.jsscripts = ["./filterworkers.js", "./deleteWorker.js"];
         var mysql = req.app.get('mysql');
         getWorkers(res, mysql, context, complete);
         getLocations(res, mysql, context, complete);
@@ -73,7 +73,7 @@ function getWorkersWithNameLike(req, res, mysql, context, complete){
 router.get('/search/:s', function(req, res){
   var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["filterworkers.js","searchworker.js"];
+        context.jsscripts = ["filterworkers.js","searchworker.js","deleteWorker.js"];
         var mysql = req.app.get('mysql');
         getWorkersWithNameLike(req, res, mysql, context, complete);
         function complete(){
@@ -87,7 +87,7 @@ router.get('/search/:s', function(req, res){
     router.get('/filter/:location', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["./filterworkers.js"];
+        context.jsscripts = ["./filterworkers.js", "./deleteWorker.js"];
         var mysql = req.app.get('mysql');
         getWorkersByLocation(req, res, mysql, context, complete);
         getLocations(res, mysql, context, complete);
@@ -115,7 +115,7 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
 });
   /* Route to delete a person, simply returns a 202 upon success. Ajax will handle this. */
 
-    router.delete('/:wid', function(req, res){
+    router.delete('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM workers WHERE wid = ?";
         var inserts = [req.params.id];

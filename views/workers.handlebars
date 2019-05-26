@@ -116,7 +116,9 @@
           <td>{{birthday}}</td>
           <td>{{location}}</td>
 	  <td>{{wSection}}</td>
+<form id='delete_worker' action='/:wid' method='delete'>
 	  <td><button onclick="deleteWorker({{wid}})">Delete</button></td>
+</form>
 	  <td><button onclick="updateWorker({{wid}})">Update</button></td>
           </tr>
       {{/each}}
