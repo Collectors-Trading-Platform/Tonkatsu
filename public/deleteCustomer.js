@@ -1,6 +1,6 @@
-function deleteCustomer(id){
+function deleteCustomer(cid){
     $.ajax({
-        url: '/customers/' + id,
+        url: '/customers/' + cid,
         type: 'DELETE',
         success: function(result){
             window.location.reload(true);

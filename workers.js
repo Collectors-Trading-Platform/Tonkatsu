@@ -39,7 +39,18 @@ function getWorkersByLocation(req, res, mysql, context, complete){
         });
 }
 
-  
+function getWorkersWithNameLike(req, res, mysql, context, complete){
+	var query = "SELECT * FROM workers WHERE wFirstName LIKE " + mysql.pool.escape(req.params.s + '%');
+      console.log(query)
+
+      mysql.pool.query(query, function(error, results, fields){
+            if(error){ res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.workers = results;
+            complete();
+        });
+    }  
 
   /*Display all workers. Requires web based javascript to delete users with AJAX*/
 
@@ -59,7 +70,19 @@ function getWorkersByLocation(req, res, mysql, context, complete){
         }
     });
 
- 
+router.get('/search/:s', function(req, res){
+  var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["filterworkers.js","searchworker.js"];
+        var mysql = req.app.get('mysql');
+        getWorkersWithNameLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('workers', context);
+            }
+        }
+    }); 
  /*Display all workers from a given location. Requires web based javascript to delete users with AJAX*/
     router.get('/filter/:location', function(req, res){
         var callbackCount = 0;
@@ -90,6 +113,24 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     }
 });
 });
+  /* Route to delete a person, simply returns a 202 upon success. Ajax will handle this. */
+
+    router.delete('/:wid', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM workers WHERE wid = ?";
+        var inserts = [req.params.id];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            }else{
+                res.status(202).end();
+            }
+        })
+    })
+
 return router;
 }();
 
