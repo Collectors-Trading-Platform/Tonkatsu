@@ -88,10 +88,10 @@ router.get('/search/:s', function(req, res){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-     //   context.jsscripts = ["selectedcustomer.js", "updatecustomer.js"];
+        context.jsscripts = ["selectedcustomer.js", "updatecustomer.js","filtercustomers.js", "deleteCustomer.js" ];
         var mysql = req.app.get('mysql');
-        getPerson(res, mysql, context, req.params.id, complete);
-        getPlanets(res, mysql, context, complete);
+        getCustomers(res, mysql, context, complete);
+        getHometowns(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
@@ -100,8 +100,6 @@ router.get('/search/:s', function(req, res){
 
         }
     });
-
-
 
 router.post('/', function(req, res){
 console.log(req.body)
@@ -119,6 +117,25 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
 });
 });
 
+   /* The URI that update data is sent to in order to update a person */
+
+   router.put('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        console.log(req.body)
+        console.log(req.params.id)
+        var sql = "UPDATE customerstable SET cFirstName=?, cLastName=?,gender=?,hometown=? WHERE cid=?";
+        var inserts = [req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });
 
     /* Route to delete a person, simply returns a 202 upon success. Ajax will handle this. */
 
