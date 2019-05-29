@@ -36,12 +36,12 @@
 
         
 <button type="submit">Submit</button>
-	<div class="field">
-	 <label>Section Name: </label>
-	 <input name="sectionName" type="number">
-	</div>
-	<button type="button">Search</button>
-    </div>
+</div>
+</form>
+<form id='search_section' action='/search/:s' method='get'>
+	 <label>Search by Section Name: </label>
+	 <input id='section_search_string' type="text" name='section_search_string' value=''>
+	<input type="button" value="Search" onclick="searchSectionByName()">
   </form>
   </div>
 

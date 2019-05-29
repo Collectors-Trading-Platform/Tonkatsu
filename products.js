@@ -29,7 +29,18 @@ function getProducts1(res, mysql, context, pid, complete){
         });
     }
 
+function getProductsWithNameLike(req, res, mysql, context, complete){
+var query = "SELECT * FROM productstable WHERE pName LIKE " + mysql.pool.escape(req.params.s + '%');
+      console.log(query)
 
+      mysql.pool.query(query, function(error, results, fields){
+            if(error){ res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.products = results;
+            complete();
+        });
+    }
 
 router.get('/', function(req, res){
         var callbackCount = 0;
@@ -64,7 +75,19 @@ router.get('/:pid', function(req, res) {
         }
     });
 
-
+router.get('/search/:s', function(req, res){
+  var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["searchproducts.js"];
+        var mysql = req.app.get('mysql');
+         getProductsWithNameLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('products', context);
+            }
+        }
+    });
  /* The URI that update data is sent to in order to update a product */
  router.put('/:pid', function(req, res) {
         var mysql = req.app.get('mysql');

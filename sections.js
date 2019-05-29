@@ -15,7 +15,18 @@ function getCustomers(res, mysql, context, complete){
         });
     }
 
+function getSectionsWithNameLike(req, res, mysql, context, complete){
+var query = "SELECT * FROM sections WHERE sname LIKE " + mysql.pool.escape(req.params.s + '%');
+      console.log(query)
 
+      mysql.pool.query(query, function(error, results, fields){
+            if(error){ res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.sections = results;
+            complete();
+        });
+    }
 router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -62,6 +73,19 @@ router.get('/:sid', function(req, res) {
         }
     });
 
+router.get('/search/:s', function(req, res){
+  var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["searchsections.js"];
+        var mysql = req.app.get('mysql');
+         getSectionsWithNameLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('sections', context);
+            }
+        }
+    });
  /* The URI that update data is sent to in order to update a section */
  router.put('/:sid', function(req, res) {
         var mysql = req.app.get('mysql');
