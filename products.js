@@ -29,17 +29,6 @@ function getProducts1(res, mysql, context, pid, complete){
         });
     }
 
-// get all sections
-    function getSections(res, mysql, context, complete){
-        mysql.pool.query("SELECT sid as id, name FROM sections", function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.sections  = results;
-            complete();
-        });
-    }
 
 
 router.get('/', function(req, res){
@@ -66,7 +55,6 @@ router.get('/:pid', function(req, res) {
         context.jsscripts = ["updateproduct.js"];
         var mysql = req.app.get('mysql');
         getProducts1(res, mysql, context, req.params.pid, complete);
-	getSections(res, mysql, context, complete);
         function complete() {
             callbackCount++;
             if (callbackCount >= 1)
