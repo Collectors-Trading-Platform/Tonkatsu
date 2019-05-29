@@ -99,7 +99,9 @@
 <form id='delete_customer' action='/:cid' method='delete'>
 	  <td><button onclick="deleteCustomer({{cid}})">Delete</button></td>
 </form>
+<form id='update_customer' action='/:id' method='put'>
 	  <td><a href="/customers/{{cid}}">Update</a></td>
+</form>
       </tr>
       {{/each}}
 
