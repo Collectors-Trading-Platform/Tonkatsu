@@ -30,6 +30,56 @@ router.get('/', function(req, res){
         }
     });
 
+
+// get specific section
+function getSections1(res, mysql, context, sid, complete){
+        var sql = "SELECT sid, sname FROM sections WHERE sid = ?";
+	var inserts = [sid];
+	mysql.pool.query(sql, inserts, function(err, results, fields){
+            if(err){
+                res.write(JSON.stringify(err));
+                res.end();
+            }
+            context.sections = results[0];
+            complete();
+        });
+    }
+
+   /* Display one section for the specific purpose of updating section */
+
+router.get('/:sid', function(req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updatesection.js"];
+        var mysql = req.app.get('mysql');
+        getSections1(res, mysql, context, req.params.sid, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 1)
+            {
+                res.render('update-section', context);
+            }
+        }
+    });
+
+ /* The URI that update data is sent to in order to update a section */
+ router.put('/:sid', function(req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE sections SET sname=? WHERE sid=?";
+        var inserts = [req.body.sname, req.params.sid];
+        sql = mysql.pool.query(sql, inserts, function(err, results, fields) {
+            if (err) {
+                res.write(JSON.stringify(err));
+                res.end();
+            } else {
+                res.status(200);
+                res.end();
+                console.log("Updated Section");
+            }
+        });
+    });
+
+
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');

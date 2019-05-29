@@ -1,11 +1,11 @@
-function updateCustomer(id) {
-    var confirmUpdate = confirm("Are you sure you want to update this Customer?");
+function updateSection(id) {
+    var confirmUpdate = confirm("Are you sure you want to update this Section?");
     if(confirmUpdate){
         
         $.ajax({
-            url: '/customers/'+ id,
+            url: '/sections/'+ id,
             type: 'PUT',
-            data: $('#update-customer').serialize(),
+            data: $('#update-section').serialize(),
             success: function(result){
                 window.location.replace("./");
                 console.log("hello");

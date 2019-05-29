@@ -55,8 +55,10 @@
       <tr>
           <td>{{sid}}</td>
           <td>{{sname}}</td>
-	  <td><button>Delete</button></td>
-	  <td><button>Update</button></td>
+<form id='delete_section' action='/:sid' method='delete'>
+	  <td><button onclick="deleteSection({{sid}})">Delete</button></td>
+</form>
+	  <td><a href="/sections/{{sid}}">Update</a></td>
       </tr>
       {{/each}}
 

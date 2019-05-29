@@ -55,8 +55,10 @@
       <tr>
           <td>{{lid}}</td>
           <td>{{city}}</td>
-	  <td><button>Delete</button></td>
-	  <td><button>Update</button></td>
+<form id='delete_location' action='/:lid' method='delete'>
+	  <td><button onclick="deleteLocation({{lid}})">Delete</button></td>
+</form>
+	  <td><a href="/locations/{{lid}}">Update</a></td>
       </tr>
       {{/each}}
 

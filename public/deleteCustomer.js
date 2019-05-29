@@ -4,6 +4,7 @@ function deleteCustomer(cid){
         type: 'DELETE',
         success: function(result){
             window.location.reload(true);
-        }
+            console.log("deleted customer");
+	}
     })
 };

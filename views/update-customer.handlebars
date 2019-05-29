@@ -1,33 +1,12 @@
-<html>
-<h1>Update {{customerstable.cFirstName}} {{customerstable.cLastName}}:</h1>
-<form id="update-customer" action="/customers" method="post">
-  <div class="fields">
-        <div class="field">
-          <label>First Name: </label>
-          <input type="text" name="cFirstName">
-        </div>
-      <div class="field">
-        <label>Last Name: </label>
-        <input type="text" name="cLastName">
-      </div>
-      <div class="field">
-        <label>gender: </label>
-	<select name="gender">
-		<option value="Male">Male</option>
-		<option value="Female">Female</option>
+<h1>Update {{cFirstName}} {{cLastName}} {{gender}} {{hometown}}:</h1>
+<form id="update-customer" action="/updatecustomer" method="post">
+    First Name: <input type="text" name="cFirstName" value="{{customerstable.cFirstName}}"><br>
+    Last Name: <input type="text" name="cLastName" value="{{customerstable.cLastName}}"><br>
+    Gender:<select name="gender">
+		<option name="male">Male</option>
+		<option name="female">Female</option>
 	</select>
-      </div> 
-      <div class="field">
-        <label>Hometown: </label>
-        <select name="hometown">
-            <option value="Brooklyn">Brooklyn</option>
-            <option value="SF">San Francisco</option>
-            <option value="LA">Los Angeles</option>
-            <option value="Boston">Boston</option>
-            <option value="Orl">Orlando</option>
-        </select>
-      </div>
-    </div>
+	<br><br>
+   Hometown: <input type="text" name="hometown" value="{{customerstable.hometown}}"><br>
 </form>
 <button onclick="updateCustomer({{customerstable.cid}})">Update</button>
-</html>

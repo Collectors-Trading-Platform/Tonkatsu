@@ -1,0 +1,5 @@
+<h1>Update {{sname}}:</h1>
+<form id="update-section" action="/updatesection" method="post">
+    Section Name: <input type="text" name="sname" value="{{sections.sname}}"><br>
+   </form>
+<button onclick="updateSection({{sections.sid}})">Update</button>

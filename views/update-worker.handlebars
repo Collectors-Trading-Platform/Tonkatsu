@@ -1,0 +1,11 @@
+<h1>Update {{wFirstName}} {{wLastName}} {{job}} {{email}} {{location}} {{wSection}}:</h1>
+
+<form id="update-worker" action="/updateworker" method="post">
+    First Name: <input type="text" name="wFirstName" value="{{workers.wFirstName}}"><br>
+    Last Name: <input type="text" name="wLastName" value="{{workers.wLastName}}"><br>
+    Job: <input type="text" name="job" value="{{workers.job}}"><br>
+    Email: <input type="text" name="email" value="{{workers.email}}"><br>
+    Location: <input type="text" name="location" value="{{workers.location}}"><br>
+    Section: <input type="text" name="wSection" value="{{workers.wSection}}"><br>
+</form>
+<button onclick="updateWorker({{workers.wid}})">Update</button>

@@ -24,6 +24,22 @@ function getWorkers(res, mysql, context, complete){
         });
 }
 
+// get specific worker
+function getWorker1(res, mysql, context, wid, complete) {
+        var sql = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid WHERE wid= ?";
+        var inserts = [wid];
+        mysql.pool.query(sql, inserts, function(err, results, fields) {
+            if (err) {
+                res.write(JSON.stringify(err));
+                res.end();
+            }
+            context.workers = results[0];
+            complete();
+        });
+    }
+
+
+
 
 function getWorkersByLocation(req, res, mysql, context, complete){
       var query = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN sections ON wSection = sections.sid INNER JOIN locations ON location = locations.lid WHERE location = ?";
@@ -101,7 +117,8 @@ router.get('/search/:s', function(req, res){
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');
-var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,(select lid from locations where city = 'San Francisco'),(select sid from sections where sname = 'Checkout'))";
+var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,(select city from locations INNER JOIN workers ON worker = workers.location INNER JOIN locations ON city = locations.city),(select sname from sections INNER JOIN workers ON worker = workers.wSection INNER JOIN sections ON wSection = sections.sid))";
+
 var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email, req.body.birthday, req.body.location, req.body.wSection];
 sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     if(error){
@@ -130,6 +147,47 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             }
         })
     })
+
+
+
+   /* Display one worker for the specific purpose of updating a worker */
+
+router.get('/:wid', function(req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updateworker.js"];
+        var mysql = req.app.get('mysql');
+        getWorker1(res, mysql, context, req.params.wid, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 1)
+            {
+                res.render('update-worker', context);
+            }
+        }
+    });
+
+
+// need to add location 
+// need to add section
+ /* The URI that update data is sent to in order to update a worker */
+ router.put('/:wid', function(req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE workers SET wFirstName=?, wLastName=?, job=?, email=?, location=?, wSection=? WHERE wid=?";
+        var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email, req.body.location, req.body.wSection, req.params.wid];
+        sql = mysql.pool.query(sql, inserts, function(err, results, fields) {
+
+            if (err) {
+                res.write(JSON.stringify(err));
+                res.end();
+            } else {
+                res.status(200);
+                res.end();
+                console.log("Updated worker");
+            }
+        });
+    });
+
 
 return router;
 }();

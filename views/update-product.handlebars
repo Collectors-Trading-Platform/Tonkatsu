@@ -1,0 +1,8 @@
+<h1>Update {{pName}} {{price}} {{pSection}} {{quantity}}:</h1>
+<form id="update-product" action="/updateproduct" method="post">
+    Product Name: <input type="text" name="pName" value="{{productstable.pName}}"><br>
+    Price: <input type="number" step=".01" name="price" value="{{productstable.price}}"><br>
+    Section: <input type="text" name="pSection" value="{{productstable.pSection}}"><br>
+    Quantity: <input type="number" name="quantity" value="{{productstable.quantity}}"><br>
+</form>
+<button onclick="updateProduct({{productstable.pid}})">Update</button>

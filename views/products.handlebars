@@ -78,8 +78,10 @@
           <td>{{price}}</td>
           <td>{{pSection}}</td>
 	  <td>{{quantity}}</td>
-	  <td><button>Delete</button></td>
-	  <td><button>Update</button></td>
+<form id='delete_product' action='/:pid' method='delete'>
+	  <td><button onclick="deleteProduct({{pid}})">Delete</button></td>
+</form>
+	  <td><a href="/products/{{pid}}">Update</a></td>
       </tr>
       {{/each}}
 
