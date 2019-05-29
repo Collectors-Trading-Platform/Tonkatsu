@@ -28,7 +28,18 @@ function getLocations1(res, mysql, context, lid, complete){
             complete();
         });
     }
+function getLocationsWithCityLike(req, res, mysql, context, complete){
+var query = "SELECT * FROM locations WHERE city LIKE " + mysql.pool.escape(req.params.s + '%');
+      console.log(query)
 
+      mysql.pool.query(query, function(error, results, fields){
+            if(error){ res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.locations = results;
+            complete();
+        });
+    }
 
  /* Display one location for the specific purpose of updating location */
 
@@ -46,7 +57,19 @@ router.get('/:lid', function(req, res) {
             }
         }
     });
-
+router.get('/search/:s', function(req, res){
+  var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["searchlocaton.js"];
+        var mysql = req.app.get('mysql');
+         getLocationsWithCityLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('locations', context);
+            }
+        }
+    });
 
 /* The URI that update data is sent to in order to update a location */
  router.put('/:lid', function(req, res) {
