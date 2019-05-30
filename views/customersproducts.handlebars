@@ -1,0 +1,66 @@
+<main>
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item"><a href="/customers">Customers</a></li>
+		<li class="breadcrumb-item"><a href="/products">Products</a></li>
+		<li class="breadcrumb-item"><a href="/workers">Workers</a></li>
+		<li class="breadcrumb-item"><a href="/sections">Sections</a></li>
+		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
+		<li class="breadcrumb-item"><a href="/customersproducts">Customers Purchase History</a></li>
+	</ol>
+	<div class="container">
+    <div>
+        <div class="container">
+            <h1 class="display-4">Customer Purchase History</h1>
+            <p class="lead">Supermarket Tonkatsu Database</p>
+        </div>
+        <ul class="attrlist">
+            <li class="attributes">Customer ID</li>
+            <li class="attributes">Product ID</li>
+       </div>
+</div>
+</div>
+
+  <div>
+<h2 class="display-4">Add a Customer Purchase</h1>
+
+  <form action="/customersproducts" method="post">
+Customer: <select name="customer_id"> 
+        {{#each customers}}
+        <option value="{{cid}}">{{cFirstName}} {{cLastName}}</option>
+        {{/each}}
+    </select><br>
+
+
+Product: <select name="product_id"> 
+        {{#each products}}
+        <option value="{{pid}}">{{pName}}</option>
+        {{/each}}
+    </select><br>
+        
+<button type="submit">Submit</button>
+  </form>
+  </div>
+
+  <table>
+    <thead>
+      <th>Customer Name</th>
+      <th>Product Purchased</th>
+    </thead>
+    <tbody>
+      {{#each customer_product}}
+      <tr>
+	  <td>{{cFirstName}} {{cLastName}}</td>
+          <td>{{pName}}</td>
+<form id='delete_customerproduct' action='/:cpid' method='delete'>
+	  <td><button onclick="deleteCustomerProduct({{cpid}})">Delete</button></td>
+</form>
+
+      </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
+
+</main>
