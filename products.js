@@ -131,7 +131,7 @@ router.get('/search/:s', function(req, res){
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');
-var sql = "INSERT INTO productstable (pName, price, pSection, quantity) VALUES  (?, ?, (select sid from sections where sname = ?), ?)";
+var sql = "INSERT INTO productstable (pName, price, pSection, quantity) VALUES  (?, ?, (select MAX(sid) from sections where sname = ?), ?)";
 var inserts = [req.body.pName, req.body.price, req.body.pSection, req.body.quantity];
 sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     if(error){
