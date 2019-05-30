@@ -67,12 +67,14 @@ CREATE TABLE `productstable` (
 
 /*
 -- Create a table called customer_product with the following properties, this is a table representing a many-to-many relationship
+-- cpid - an auto incrementing integer which is the primary key
 -- between customerstable and productstable,
 -- customer_id - an integer which is a foreign key reference to customerstable cid
 -- product_id - an integer which is a foreign key reference to productstable pid
 */
 
 CREATE TABLE `customer_product` (
+    `cpid` int AUTO_INCREMENT PRIMARY KEY,
     `customer_id` int,
     `product_id` int,
 	FOREIGN KEY (`customer_id`) REFERENCES  `customerstable`(`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
