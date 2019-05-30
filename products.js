@@ -1,7 +1,18 @@
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
-
+// get sections
+function getSection(res, mysql, context, complete){
+        mysql.pool.query("SELECT sid, sname FROM sections", 
+        function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.sections = results;
+            complete();
+        });
+    }
 
 function getProducts(res, mysql, context, complete){
         mysql.pool.query("SELECT pid, pName, price, pSection, quantity from productstable",
@@ -47,9 +58,10 @@ router.get('/', function(req, res){
         var context = {};
         var mysql = req.app.get('mysql');
         getProducts(res, mysql, context, complete);
+	getSection(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('products', context);
             }
 
@@ -65,10 +77,11 @@ router.get('/:pid', function(req, res) {
         var context = {};
         context.jsscripts = ["updateproduct.js"];
         var mysql = req.app.get('mysql');
-        getProducts1(res, mysql, context, req.params.pid, complete);
+        getSection(res, mysql, context, complete);
+	getProducts1(res, mysql, context, req.params.pid, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 1)
+            if (callbackCount >= 2)
             {
                 res.render('update-product', context);
             }
@@ -78,7 +91,7 @@ router.get('/:pid', function(req, res) {
 router.get('/search/:s', function(req, res){
   var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["searchproducts.js"];
+        context.jsscripts = ["./searchproducts.js"];
         var mysql = req.app.get('mysql');
          getProductsWithNameLike(req, res, mysql, context, complete);
         function complete(){
@@ -118,7 +131,7 @@ router.get('/search/:s', function(req, res){
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');
-var sql = "INSERT INTO productstable (pName, price, pSection, quantity) VALUES  (?, ?, (select sid from sections where sname = 'Toys'), ?)";
+var sql = "INSERT INTO productstable (pName, price, pSection, quantity) VALUES  (?, ?, (select sid from sections where sname = ?), ?)";
 var inserts = [req.body.pName, req.body.price, req.body.pSection, req.body.quantity];
 sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     if(error){
@@ -151,4 +164,3 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
 
 return router;
 }();
-

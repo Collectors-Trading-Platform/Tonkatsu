@@ -62,14 +62,17 @@
         <input name="birthday" type="date">
      
      </div>  
-      <div class="field">
-        <label>Location: </label>
-        <input name="location" type="text">
-      </div>       
-      <div class="field">
-	<label>Section: </label>
-	<input name="wSection" type="text">
-      </div>
+Location: <select name="location"> 
+        {{#each locations}}
+        <option value="{{city}}">{{city}}</option>
+        {{/each}}
+    </select><br> 
+Section: <select name="wSection"> 
+        {{#each sections}}
+        <option value="{{sname}}">{{sname}}</option>
+        {{/each}}
+    </select><br>
+
       
 <button type="submit">Submit</button>
 <br/>

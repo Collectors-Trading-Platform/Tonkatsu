@@ -2,6 +2,19 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+// get sections
+function getSection(res, mysql, context, complete){
+        mysql.pool.query("SELECT sid, sname FROM sections", 
+        function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.sections = results;
+            complete();
+        });
+    }
+
 function getLocations(res, mysql, context, complete){
         mysql.pool.query("SELECT lid, city FROM locations", function(error, results, fields){
             if(error){
@@ -77,9 +90,10 @@ function getWorkersWithNameLike(req, res, mysql, context, complete){
         var mysql = req.app.get('mysql');
         getWorkers(res, mysql, context, complete);
         getLocations(res, mysql, context, complete);
+	getSection(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 3){
                 res.render('workers', context);
             }
 
@@ -117,8 +131,8 @@ router.get('/search/:s', function(req, res){
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');
-var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,(select city from locations INNER JOIN workers ON worker = workers.location INNER JOIN locations ON city = locations.city),(select sname from sections INNER JOIN workers ON worker = workers.wSection INNER JOIN sections ON wSection = sections.sid))";
 
+var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,(select DISTINCT lid from locations where city = ? ),(select DISTINCT sid from sections where sname = ?))";
 var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email, req.body.birthday, req.body.location, req.body.wSection];
 sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     if(error){
@@ -158,9 +172,10 @@ router.get('/:wid', function(req, res) {
         context.jsscripts = ["updateworker.js"];
         var mysql = req.app.get('mysql');
         getWorker1(res, mysql, context, req.params.wid, complete);
+	getSection(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 1)
+            if (callbackCount >= 2)
             {
                 res.render('update-worker', context);
             }

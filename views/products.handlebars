@@ -27,7 +27,7 @@
 </div>
 <br>
 <br>
-
+<h2 class="display-4">Add Product</h1>
 
   <div>
   <form action="/products" method="post">
@@ -44,18 +44,27 @@
         <input name="price" type="number" step=".01">
       </div>
 
-      <div class="field">
-        <label>Section: </label>
-        <input name="pSection" type="text">
-      </div> 
+  
+
+Section: <select name="pSection"> 
+        {{#each sections}}
+        <option value="{{sname}}">{{sname}}</option>
+        {{/each}}
+    </select><br>
+
+
       <div class="field">
         <label>Quantity: </label>
         <input name="quantity" type="number">
       </div>
 
  <button type="submit">Submit</button>
+
+<br>
+<br>
 </div>
 </form>
+</div>
 <form id='search_products" action='/search/:s' method='get'>
 	 <label>Product Name: </label>
 	 <input id='products_search_string' type="text" name='products_search_string' value=''>
@@ -84,9 +93,6 @@
 	  <td><a href="/products/{{pid}}">Update</a></td>
       </tr>
       {{/each}}
-
     </tbody>
   </table>
-
-
 </main>
