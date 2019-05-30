@@ -16,6 +16,7 @@ app.use('/products', require('./products.js'));
 app.use('/customers', require('./customers.js'));
 app.use('/locations', require('./locations.js'));
 app.use('/sections', require('./sections.js'));
+app.use('/customersproducts', require('./customersproducts.js'));
 app.use('/', express.static('public'));
 
 app.get('/',function(req,res) {
