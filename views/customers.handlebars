@@ -58,22 +58,17 @@
  <input type="submit" value="Submit">
 </form>
 </div>
+<div>
 <form id='filter_customers' action='/filter/:hometown' method='get'>
-<!--- this form does not submit directly, the button handles all the interaction with backend -->
     <label> Filter by hometown </label>
     <select id='hometown_filter' name="hometown"> 
-        {{#each hometowns}}
-        <option value="{{hometown}}">{{hometown}}</option>
+        {{#each customers}}
+        <option value="{{cid}}">{{hometown}}</option>
         {{/each}}
     </select><br>
     <input type="button" value="Filter" onclick="filterCustomersByHometown()">
 </form>
 <div>
-<form id='search_customer' action='/search/:s' method='get'>
-	 <label>Search by Customer First Name: </label>
-	 <input id='first_name_search_string' type="text" name='first_name_search_string' value=''>
-	<input type="button" value="Search" onclick="searchCustomerByFirstName()">
-  </form>
    </div>
  <table>
     <thead>

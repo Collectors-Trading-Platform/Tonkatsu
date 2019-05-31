@@ -13,6 +13,19 @@ function getHometowns(res, mysql, context, complete){
         });
  }
 
+function getCustomersByHometown(req, res, mysql, context, complete){
+  var query = "SELECT cid, cFirstName, cLastName, gender, hometown from customerstable where cid = ?";
+      console.log(req.params)
+      var inserts = [req.params.hometown]
+      mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.customers = results;
+            complete();
+        });
+}
 
 function getCustomers(res, mysql, context, complete){
         mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
@@ -75,7 +88,7 @@ router.get('/', function(req, res){
         var context = {};
         context.jsscripts = ["./filtercustomers.js","./searchcustomer.js","./deleteCustomer.js"];
         var mysql = req.app.get('mysql');
-        getCustomers(res, mysql, context, complete);
+        getCustomersByHometown(req, res, mysql, context, complete);
         getHometowns(res, mysql, context, complete);
         function complete(){
             callbackCount++;
