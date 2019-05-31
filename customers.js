@@ -102,7 +102,7 @@ router.get('/search/:s', function(req, res){
    /* Display one person for the specific purpose of updating people */
 
 router.get('/:cid', function(req, res) {
-        callbackCount = 0;
+        var callbackCount = 0;
         var context = {};
         context.jsscripts = ["updatecustomer.js"];
         var mysql = req.app.get('mysql');
