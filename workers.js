@@ -15,8 +15,10 @@ function getSection(res, mysql, context, complete){
         });
     }
 
-function getLocations(res, mysql, context, complete){
-        mysql.pool.query("SELECT lid, city FROM locations", function(error, results, fields){
+// get locations
+function getLocation(res, mysql, context, complete){
+        mysql.pool.query("SELECT lid, city FROM locations", 
+        function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -24,10 +26,13 @@ function getLocations(res, mysql, context, complete){
             context.locations = results;
             complete();
         });
- }
+    }
+
+
+
 
 function getWorkers(res, mysql, context, complete){
-        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid", function(error, results, fields){
+        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS locationname, location, sections.sname AS sectionname, wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -39,7 +44,7 @@ function getWorkers(res, mysql, context, complete){
 
 // get specific worker
 function getWorker1(res, mysql, context, wid, complete) {
-        var sql = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid WHERE wid= ?";
+        var sql = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS locationname, location, sections.sname AS sectionname, wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid WHERE wid= ?";
         var inserts = [wid];
         mysql.pool.query(sql, inserts, function(err, results, fields) {
             if (err) {
@@ -54,42 +59,16 @@ function getWorker1(res, mysql, context, wid, complete) {
 
 
 
-function getWorkersByLocation(req, res, mysql, context, complete){
-      var query = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS location, sections.sname AS wSection from workers INNER JOIN sections ON wSection = sections.sid INNER JOIN locations ON location = locations.lid WHERE location = ?";
-      console.log(req.params)
-      var inserts = [req.params.location]
-      mysql.pool.query(query, inserts, function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.workers = results;
-            complete();
-        });
-}
-
-function getWorkersWithNameLike(req, res, mysql, context, complete){
-	var query = "SELECT * FROM workers WHERE wFirstName LIKE " + mysql.pool.escape(req.params.s + '%');
-      console.log(query)
-
-      mysql.pool.query(query, function(error, results, fields){
-            if(error){ res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.workers = results;
-            complete();
-        });
-    }  
 
   /*Display all workers. Requires web based javascript to delete users with AJAX*/
 
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["./filterworkers.js", "./deleteWorker.js"];
+        context.jsscripts = ["./deleteWorker.js"];
         var mysql = req.app.get('mysql');
         getWorkers(res, mysql, context, complete);
-        getLocations(res, mysql, context, complete);
+        getLocation(res, mysql, context, complete);
 	getSection(res, mysql, context, complete);
         function complete(){
             callbackCount++;
@@ -100,39 +79,13 @@ function getWorkersWithNameLike(req, res, mysql, context, complete){
         }
     });
 
-router.get('/search/:s', function(req, res){
-  var callbackCount = 0;
-        var context = {};
-        context.jsscripts = ["filterworkers.js","searchworker.js","deleteWorker.js"];
-        var mysql = req.app.get('mysql');
-        getWorkersWithNameLike(req, res, mysql, context, complete);
-        function complete(){
-            callbackCount++;
-            if(callbackCount >= 1){
-                res.render('workers', context);
-            }
-        }
-    }); 
- /*Display all workers from a given location. Requires web based javascript to delete users with AJAX*/
-    router.get('/filter/:location', function(req, res){
-        var callbackCount = 0;
-        var context = {};
-        context.jsscripts = ["./filterworkers.js", "./deleteWorker.js"];
-        var mysql = req.app.get('mysql');
-        getWorkersByLocation(req, res, mysql, context, complete);
-        getLocations(res, mysql, context, complete);
-        function complete(){
-            callbackCount++;
-	    if (callbackCount >= 2){
-                res.render('workers', context);
-            }
-	}
-    });
+
+// add worker
 router.post('/', function(req, res){
 console.log(req.body)
 var mysql = req.app.get('mysql');
 
-var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,(select MAX(lid) from locations where city = ? ),(select MAX(sid) from sections where sname = ?))";
+var sql = "INSERT INTO workers (wFirstName, wLastName, job, email, birthday, location, wSection) VALUES  (?,?,?,?,?,(select lid from locations where lid = ?),(select sid from sections where sid = ?))";
 var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email, req.body.birthday, req.body.location, req.body.wSection];
 sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     if(error){
@@ -144,6 +97,7 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     }
 });
 });
+
   /* Route to delete a person, simply returns a 202 upon success. Ajax will handle this. */
 
     router.delete('/:id', function(req, res){
@@ -167,15 +121,16 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
    /* Display one worker for the specific purpose of updating a worker */
 
 router.get('/:wid', function(req, res) {
-        callbackCount = 0;
+        var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updateworker.js"];
+        context.jsscripts = ["selectedsection.js", "selectedlocation.js", "updateworker.js"];
         var mysql = req.app.get('mysql');
         getWorker1(res, mysql, context, req.params.wid, complete);
-	getSection(res, mysql, context, complete);
+        getSection(res, mysql, context, complete);
+        getLocation(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 2)
+            if (callbackCount >= 3)
             {
                 res.render('update-worker', context);
             }
@@ -183,15 +138,12 @@ router.get('/:wid', function(req, res) {
     });
 
 
-// need to add location 
-// need to add section
  /* The URI that update data is sent to in order to update a worker */
  router.put('/:wid', function(req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE workers SET wFirstName=?, wLastName=?, job=?, email=?, location=?, wSection=? WHERE wid=?";
+        var sql = "UPDATE workers SET wFirstName=?, wLastName=?, job=?, email=?, location=(SELECT lid FROM locations WHERE lid = ?), wSection=(SELECT sid FROM sections WHERE sid = ?) WHERE wid=?";
         var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email, req.body.location, req.body.wSection, req.params.wid];
         sql = mysql.pool.query(sql, inserts, function(err, results, fields) {
-
             if (err) {
                 res.write(JSON.stringify(err));
                 res.end();
