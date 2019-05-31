@@ -44,7 +44,7 @@ var query = "SELECT * FROM locations WHERE city LIKE " + mysql.pool.escape(req.p
  /* Display one location for the specific purpose of updating location */
 
 router.get('/:lid', function(req, res) {
-        callbackCount = 0;
+        var callbackCount = 0;
         var context = {};
         context.jsscripts = ["updatelocation.js"];
         var mysql = req.app.get('mysql');
