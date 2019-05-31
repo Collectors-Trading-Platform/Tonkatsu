@@ -1,18 +1,99 @@
-<html>
+<main>
 
-<h1>Update {{pName}} {{price}} {{pSection}} {{quantity}}:</h1>
-<form id="update-product" action="/updateproduct" method="post">
-    Product Name: <input type="text" name="pName" value="{{productstable.pName}}"><br>
-    Price: <input type="number" step=".01" name="price" value="{{productstable.price}}"><br>
-    Section: <select name="pSection" id="section-selector"> 
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/">Home</a></li>
+		<li class="breadcrumb-item"><a href="/customers">Customers</a></li>
+		<li class="breadcrumb-item"><a href="/products">Products</a></li>
+		<li class="breadcrumb-item"><a href="/workers">Workers</a></li>
+		<li class="breadcrumb-item"><a href="/sections">Sections</a></li>
+		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
+		<li class="breadcrumb-item"><a href="/customersproducts">Customers Purchase History</a></li>
+	</ol>
+	<div class="container">
+    <div>
+        <div class="container">
+            <h1 class="display-4">Products</h1>
+            <p class="lead">Supermarket Tonkatsu Database</p>
+        </div>
+        <ul class="attrlist">
+            <li class="attributes">Product ID</li>
+            <li class="attributes">Name</li>
+            <li class="attributes">Price</li>
+            <li class="attributes">Section</li>
+            <li class="attributes">Quantity</li>
+
+    </div>
+</div>
+</div>
+<br>
+<br>
+<h2 class="display-4">Add Product</h1>
+
+  <div>
+  <form action="/products" method="post">
+    <div>
+      <div class="fields">
+        <div class="field">
+          <label>Product Name: </label>
+          <input name="pName" type="text">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Price: </label>
+        <input name="price" type="number" step=".01">
+      </div>
+
+  
+
+Section: <select name="pSection"> 
         {{#each sections}}
         <option value="{{sid}}">{{sname}}</option>
         {{/each}}
     </select><br>
-    Quantity: <input type="number" name="quantity" value="{{productstable.quantity}}"><br>
+
+
+      <div class="field">
+        <label>Quantity: </label>
+        <input name="quantity" type="number">
+      </div>
+
+ <button type="submit">Submit</button>
+
+<br>
+<br>
+</div>
 </form>
-<button onclick="updateProduct({{productstable.pid}})">Update</button>
-
-<script defer>selectSection({{productstable.pSection}});</script>
-
-</html>
+</div>
+<form id='search_products" action='/search/:s' method='get'>
+	 <label>Product Name: </label>
+	 <input id='products_search_string' type="text" name='products_search_string' value=''>
+	<input type="button" value="Search" onclick="searchProductsByName()">
+  </form>
+  </div>
+ <table>
+    <thead>
+      <th>Product ID</th>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Section</th>
+      <th>Quantity</th>
+    </thead>
+    <tbody>
+      {{#each products}}
+      <tr>
+          <td>{{pid}}</td>
+          <td>{{pName}}</td>
+          <td>{{price}}</td>
+          <td>{{sectionName}}</td>
+	  <td>{{quantity}}</td>
+<form id='delete_product' action='/:pid' method='delete'>
+	  <td><button onclick="deleteProduct({{pid}})">Delete</button></td>
+</form>
+	  <td><a href="/products/{{pid}}">Update</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</main>
