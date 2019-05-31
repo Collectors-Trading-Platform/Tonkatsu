@@ -59,7 +59,7 @@ function getSections1(res, mysql, context, sid, complete){
    /* Display one section for the specific purpose of updating section */
 
 router.get('/:sid', function(req, res) {
-        callbackCount = 0;
+        var callbackCount = 0;
         var context = {};
         context.jsscripts = ["updatesection.js"];
         var mysql = req.app.get('mysql');
