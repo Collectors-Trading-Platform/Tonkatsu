@@ -9,17 +9,16 @@
 		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
 		<li class="breadcrumb-item"><a href="/customersproducts">Customers Purchase History</a></li>
 	</ol>
-	<div class="container">
-    <div>
+	
         <div class="container">
             <h1 class="display-4">Locations</h1>
             <p class="lead">Supermarket Tonkatsu Database</p>
         </div>
-       </div>
-</div>
+     
 </div>
 <br>
 <br>
+<h2 class="display-4">Add Location</h1>
 
   <div>
 
@@ -51,7 +50,7 @@
 <form id='delete_location' action='/:lid' method='delete'>
 	  <td><button onclick="deleteLocation({{lid}})">Delete</button></td>
 </form>
-	  <td><a href="/locations/{{lid}}">Update</a></td>
+	  <td><button href="/locations/{{lid}}">Update</button></td>
       </tr>
       {{/each}}
 

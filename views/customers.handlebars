@@ -9,19 +9,16 @@
 		<li class="breadcrumb-item"><a href="/locations">Locations</a></li>
 		<li class="breadcrumb-item"><a href="/customersproducts">Customers Purchase History</a></li>
 	</ol>
-	<div class="container">
-    <div>
         <div class="container">
             <h1 class="display-4">Customers</h1>
             <p class="lead">Supermarket Tonkatsu Database</p>
         </div>
     </div>
-    </div>
-</div>
 
 <br>
 <br>
 
+<h2 class="display-4">Add Customer</h1>
 
   <div>
   <form id="addcustomer" action="/customers" method="post">
@@ -82,7 +79,8 @@
 <form id='delete_customer' action='/:cid' method='delete'>
 	  <td><button onclick="deleteCustomer({{cid}})">Delete</button></td>
 </form>
-	  <td><a href="/customers/{{cid}}">Update</a></td>
+
+	  <td><button href="/customers/{{cid}}">Update</button></td>
       </tr>
       {{/each}}
 

@@ -1,8 +1,9 @@
-img {
- height: 400px;
-background-position:center;
-background-repeat: no-repeat; /* Do not repeat the image */
- background-size: cover;
-
+body{
+position:relative;
+left:100px;
 }
 
+img{
+ display: block;
+  width: 60%;
+}

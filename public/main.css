@@ -1,10 +1,15 @@
-html{
-text-align: center;
+.container{
+position: relative;
+right:86px;
 }
 .breadcrumb-item{
+position: relative;
 display:inline;
 }
-body {
-}
 
+
+body {
+position: relative;
+left:100px;
+}
 
