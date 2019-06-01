@@ -1,15 +1,21 @@
 .container{
 position: relative;
-right:86px;
+align-items: center;
+    justify-content: center;
 }
 .breadcrumb-item{
 position: relative;
 display:inline;
 }
 
-
 body {
 position: relative;
-left:100px;
+align-items: center;
+    justify-content: center;
 }
+
+img {
+position: relative;
+align-items:center;
+justify-content:center;}
 

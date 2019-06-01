@@ -1,4 +1,5 @@
 <main>
+<link rel="stylesheet" href="./customers.css">
 <div class="container">
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -14,11 +15,10 @@
             <p class="lead">Supermarket Tonkatsu Database</p>
         </div>
     </div>
-
-<br>
 <br>
 
-<h2 class="display-4">Add Customer</h1>
+<body>
+<h3>Add Customer</h3>
 
   <div>
   <form id="addcustomer" action="/customers" method="post">
@@ -44,13 +44,13 @@
         <input type="text" name="hometown">
       </div>
     </div>
-</div>
  <input type="submit" value="Submit">
 </form>
 </div>
 <div>
+<h3>Filter By Customer's Hometown</h3>
 <form id='filter_customers' action='/filter/:hometown' method='get'>
-    <label> Filter by hometown </label>
+    <label> Filter by Hometown: </label>
     <select id='hometown_filter' name="hometown"> 
         {{#each customers}}
         <option value="{{cid}}">{{hometown}}</option>
@@ -58,8 +58,9 @@
     </select><br>
     <input type="button" value="Filter" onclick="filterCustomersByHometown()">
 </form>
-<div>
+<br>
    </div>
+<div>
  <table>
     <thead>
       <th>Customer ID</th>
@@ -88,4 +89,6 @@
   </table>
 
 
+</div>
+</body>
 </main>
