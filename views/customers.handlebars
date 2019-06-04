@@ -48,6 +48,7 @@
 </form>
 </div>
 <div>
+<br>
 <h3>Filter By Customer's Hometown</h3>
 <form id='filter_customers' action='/filter/:hometown' method='get'>
     <label> Filter by Hometown: </label>
@@ -81,7 +82,7 @@
 	  <td><button onclick="deleteCustomer({{cid}})">Delete</button></td>
 </form>
 
-	  <td><button href="/customers/{{cid}}">Update</button></td>
+	  <td><a class="btn btn-default" href="/customers/{{cid}}">Update</a></td>
       </tr>
       {{/each}}
 

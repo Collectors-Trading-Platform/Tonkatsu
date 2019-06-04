@@ -68,6 +68,7 @@ Section: <select name="wSection">
 
  
   </div>
+<br>
 <div>
   <table>
     <thead>
@@ -94,7 +95,7 @@ Section: <select name="wSection">
 <form id='delete_worker' action='/:wid' method='delete'>
 	  <td><button onclick="deleteWorker({{wid}})">Delete</button></td>
 </form>
-	<td><button href="/workers/{{wid}}">Update</button></td>  
+	<td><a class="btn btn-default" href="/workers/{{wid}}">Update</a></td>  
           </tr>
       {{/each}}
 

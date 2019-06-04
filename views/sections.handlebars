@@ -36,7 +36,7 @@
 </div>
 </form>
   </div>
-
+<br>
   <table>
     <thead>
       <th>Section ID</th>
@@ -50,7 +50,7 @@
 <form id='delete_section' action='/:sid' method='delete'>
 	  <td><button onclick="deleteSection({{sid}})">Delete</button></td>
 </form>
-	  <td><button href="/sections/{{sid}}">Update</button></td>
+	  <td><a class="btn btn-default" href="/sections/{{sid}}">Update</a></td>
       </tr>
       {{/each}}
 

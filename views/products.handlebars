@@ -76,7 +76,7 @@ Section: <select name="pSection">
 <form id='delete_product' action='/:pid' method='delete'>
 	  <td><button onclick="deleteProduct({{pid}})">Delete</button></td>
 </form>
-	  <td><button href="/products/{{pid}}">Update</button></td>
+	  <td><a class="btn btn-default" href="/products/{{pid}}">Update</a></td>
       </tr>
       {{/each}}
     </tbody>
