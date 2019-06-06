@@ -49,16 +49,12 @@
 </div>
 <div>
 <br>
-<h3>Filter By Customer's Hometown</h3>
-<form id='filter_customers' action='/filter/:hometown' method='get'>
-    <label> Filter by Hometown: </label>
-    <select id='hometown_filter' name="hometown"> 
-        {{#each customers}}
-        <option value="{{cid}}">{{hometown}}</option>
-        {{/each}}
-    </select><br>
-    <input type="button" value="Filter" onclick="filterCustomersByHometown()">
-</form>
+<h3>Search by Customer's First Name</h3>
+<form id='search_customer' action='/search/:s' method='get'>
+	 <label>Search by Customer First Name: </label>
+	 <input id='first_name_search_string' type="text" name='first_name_search_string' value=''>
+	<input type="button" value="Search" onclick="searchCustomerByFirstName()">
+  </form>
 <br>
    </div>
 <div>

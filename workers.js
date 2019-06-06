@@ -29,10 +29,9 @@ function getLocation(res, mysql, context, complete){
     }
 
 
-
-
+  
 function getWorkers(res, mysql, context, complete){
-        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS locationname, location, sections.sname AS sectionname, wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid", function(error, results, fields){
+        mysql.pool.query("SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS locationname, location, sections.sname AS sectionname, wSection from workers LEFT JOIN locations ON location = locations.lid LEFT JOIN sections ON wSection = sections.sid", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -44,7 +43,7 @@ function getWorkers(res, mysql, context, complete){
 
 // get specific worker
 function getWorker1(res, mysql, context, wid, complete) {
-        var sql = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS locationname, location, sections.sname AS sectionname, wSection from workers INNER JOIN locations ON location = locations.lid INNER JOIN sections ON wSection = sections.sid WHERE wid= ?";
+        var sql = "SELECT wid, wFirstName, wLastName, job, email, birthday, locations.city AS locationname, location, sections.sname AS sectionname, wSection from workers LEFT JOIN locations ON location = locations.lid LEFT JOIN sections ON wSection = sections.sid WHERE wid= ?";
         var inserts = [wid];
         mysql.pool.query(sql, inserts, function(err, results, fields) {
             if (err) {
@@ -97,7 +96,6 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     }
 });
 });
-
   /* Route to delete a person, simply returns a 202 upon success. Ajax will handle this. */
 
     router.delete('/:id', function(req, res){

@@ -16,7 +16,7 @@ function getSection(res, mysql, context, complete){
     }
 
 function getProducts(res, mysql, context, complete){
-        mysql.pool.query("SELECT pid, pName, price, sections.sname as sectionName, pSection, quantity from productstable INNER JOIN sections ON pSection = sections.sid",
+        mysql.pool.query("SELECT pid, pName, price, sections.sname as sectionName, pSection, quantity from productstable LEFT JOIN sections ON pSection = sections.sid",
 	 function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
