@@ -8,7 +8,7 @@ function getHometowns(res, mysql, context, complete){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.customers = results;
+            context.customers1 = results;
             complete();
         });
  }
@@ -89,10 +89,10 @@ router.get('/', function(req, res){
         context.jsscripts = ["./filtercustomers.js","./searchcustomer.js","./deleteCustomer.js"];
         var mysql = req.app.get('mysql');
         getCustomersByHometown(req, res, mysql, context, complete);
-        
+        getHometowns(res, mysql, context, complete);
         function complete(){
             callbackCount++;
-	    if (callbackCount >= 1){
+	    if (callbackCount >= 2){
                 res.render('customers', context);
             }
 	}
