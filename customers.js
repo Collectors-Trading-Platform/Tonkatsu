@@ -3,12 +3,12 @@ module.exports = function(){
     var router = express.Router();
 
 function getHometowns(res, mysql, context, complete){
-        mysql.pool.query("SELECT hometown FROM customerstable", function(error, results, fields){
+        mysql.pool.query("SELECT * FROM customerstable", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.hometowns = results;
+            context.customers = results;
             complete();
         });
  }
@@ -89,10 +89,10 @@ router.get('/', function(req, res){
         context.jsscripts = ["./filtercustomers.js","./searchcustomer.js","./deleteCustomer.js"];
         var mysql = req.app.get('mysql');
         getCustomersByHometown(req, res, mysql, context, complete);
-        getHometowns(res, mysql, context, complete);
+        
         function complete(){
             callbackCount++;
-	    if (callbackCount >= 2){
+	    if (callbackCount >= 1){
                 res.render('customers', context);
             }
 	}
