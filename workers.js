@@ -139,8 +139,8 @@ router.get('/:wid', function(req, res) {
  /* The URI that update data is sent to in order to update a worker */
  router.put('/:wid', function(req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE workers SET wFirstName=?, wLastName=?, job=?, email=?, location=(SELECT lid FROM locations WHERE lid = ?), wSection=(SELECT sid FROM sections WHERE sid = ?) WHERE wid=?";
-        var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email, req.body.location, req.body.wSection, req.params.wid];
+        var sql = "UPDATE workers SET wFirstName=?, wLastName=?, job=?, email=?,birthday=?, location=(SELECT lid FROM locations WHERE lid = ?), wSection=(SELECT sid FROM sections WHERE sid = ?) WHERE wid=?";
+        var inserts = [req.body.wFirstName, req.body.wLastName, req.body.job, req.body.email,req.body.birthday, req.body.location, req.body.wSection, req.params.wid];
         sql = mysql.pool.query(sql, inserts, function(err, results, fields) {
             if (err) {
                 res.write(JSON.stringify(err));
