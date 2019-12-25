@@ -1,6 +1,8 @@
 # CS340FinalProject
 Team Tonkatsu
 
--README!
+*README*
 
-To obtain dbcon.js file, please go to diagnostic folder in 340 repository and copy file onto 340 Project directory.
+CRUD Website leveraging MySQL, HTML/CSS, Javascript
+
+Welcome to the Tonkatsu Supermarket's Website and Database, "Only for employees!"
