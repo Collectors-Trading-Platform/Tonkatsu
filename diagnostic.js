@@ -1,9 +1,9 @@
 var express = require('express');
-var mysql = require('pg');
+const { Pool }= require('pg');
 var app = express();
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-var pool = mysql.createPool({
+const pool = new Pool({
 	host: 'ec2-52-207-25-133.compute-1.amazonaws.com',
 	user: 'tfoczylyskmhtl',
 	password: '8ed88d7b9e016b0995155a3cfbc71114bfb8ea8f02d75f1953188564cf18728a',
@@ -20,14 +20,14 @@ app.use('/', express.static('public'));
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
-  mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
+  Pool.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
     var createString = "CREATE TABLE customerstable("+
     "cid INT PRIMARY KEY AUTO_INCREMENT,"+
     "cFirstName VARCHAR(50) NOT NULL,"+
     "cLastName VARCHAR(50) NOT NULL,"+
     "gender VARCHAR(50) NOT NULL,"+
     "hometown VARCHAR(50) NOT NULL)";
-    mysql.pool.query(createString, function(err){
+    Pool.pool.query(createString, function(err){
       context.results = "Table reset";
       res.render('reset',context);
     })
@@ -38,8 +38,8 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    function getCustomers(res, mysql, context, complete){
-        mysql.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
+    function getCustomers(res, Pool, context, complete){
+        Pool.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
 
             if(error){
                 res.write(JSON.stringify(error));
@@ -52,10 +52,10 @@ module.exports = function(){
 
 router.post('/', function(req, res){
         console.log(req.body)
-        var mysql = req.app.get('mysql');
+        var Pool = req.app.get('Pool');
         var sql = "INSERT INTO customerstable (cFirstName, cLastName, gender, hometown) VALUES (?,?,?,?,?)";
         var inserts = [req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+        sql = Pool.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
                 res.write(JSON.stringify(error));
