@@ -4,16 +4,16 @@ var app = express();
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var pool = mysql.createPool({
-	host: 'classmysql.engr.oregonstate.edu',
-	user: 'cs340_limjas',
-	password: '2425',
-	database: 'cs340_limjas'
+	host: 'ec2-52-207-25-133.compute-1.amazonaws.com',
+	user: 'tfoczylyskmhtl',
+	password: '8ed88d7b9e016b0995155a3cfbc71114bfb8ea8f02d75f1953188564cf18728a',
+	database: 'd41n2g43kclvmr'
 });
 
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 22250);
+app.set('port', 5432);
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use('/', express.static('public'));
