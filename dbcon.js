@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('pg');
 var pool = mysql.createPool({
   connectionLimit : 10,
   host            : 'ec2-52-207-25-133.compute-1.amazonaws.com',
