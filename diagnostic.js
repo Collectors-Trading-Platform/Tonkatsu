@@ -13,7 +13,7 @@ var pool = mysql.createPool({
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', process.env.port || 5000);
+app.set('port', app.get('port'));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use('/', express.static('public'));
