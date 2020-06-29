@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
 
-app.set('port', 3306);
+app.set('port', process.env.PORT || 3036);
 app.set('mysql', mysql);
 app.use('/workers', require('./workers.js'));
 app.use('/products', require('./products.js'));
@@ -35,7 +35,7 @@ app.use(function(err, req, res, next){
   res.render('500');
 });
 
-app.listen(app.get('port'), function(){
+app.listen(process.env.PORT, function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
 
