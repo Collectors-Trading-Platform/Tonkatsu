@@ -1,33 +1,33 @@
 var express = require('express');
-const { Pool }= require('pg');
+var mysql = require('mysql');
 var app = express();
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-const pool = new Pool({
-	host: 'ec2-52-207-25-133.compute-1.amazonaws.com',
-	user: 'tfoczylyskmhtl',
-	password: '8ed88d7b9e016b0995155a3cfbc71114bfb8ea8f02d75f1953188564cf18728a',
-	database: 'd41n2g43kclvmr'
+var pool = mysql.createPool({
+	host: 'us-cdbr-east-02.cleardb.com',
+	user: 'b5740ca304b5bc',
+	password: 'fee9d940',
+	database: 'heroku_f8290df26fb9a01'
 });
 
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 5432);
+app.set('port', process.env.port || 5000);
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use('/', express.static('public'));
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
-  Pool.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
+  mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
     var createString = "CREATE TABLE customerstable("+
     "cid INT PRIMARY KEY AUTO_INCREMENT,"+
     "cFirstName VARCHAR(50) NOT NULL,"+
     "cLastName VARCHAR(50) NOT NULL,"+
     "gender VARCHAR(50) NOT NULL,"+
     "hometown VARCHAR(50) NOT NULL)";
-    Pool.pool.query(createString, function(err){
+    mysql.pool.query(createString, function(err){
       context.results = "Table reset";
       res.render('reset',context);
     })
@@ -38,8 +38,8 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    function getCustomers(res, Pool, context, complete){
-        Pool.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
+    function getCustomers(res, mysql, context, complete){
+        mysql.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
 
             if(error){
                 res.write(JSON.stringify(error));
@@ -52,10 +52,10 @@ module.exports = function(){
 
 router.post('/', function(req, res){
         console.log(req.body)
-        var Pool = req.app.get('Pool');
+        var mysql = req.app.get('mysql');
         var sql = "INSERT INTO customerstable (cFirstName, cLastName, gender, hometown) VALUES (?,?,?,?,?)";
         var inserts = [req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown];
-        sql = Pool.pool.query(sql,inserts,function(error, results, fields){
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
                 res.write(JSON.stringify(error));
@@ -116,7 +116,7 @@ app.use(function(err, req, res, next){
   res.render('500');
 });
 
-app.listen(process.env.PORT, function(){
+app.listen(app.get('port'), function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
 return router
