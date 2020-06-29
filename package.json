@@ -23,5 +23,5 @@
     "method-override":"*",
     "errorhandler": "*",
     "multer": "0.1.*"
-  },
+  }
 }
