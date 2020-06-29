@@ -1,4 +1,4 @@
-var mysql = require('pg');
+var mysql = require('mysql');
 var pool = mysql.createPool({
   connectionLimit : 10,
   host            : 'us-cdbr-east-02.cleardb.com',
