@@ -63,7 +63,13 @@ app.use(function(err, req, res, next){
   res.render('500');
 });
 
-app.listen(process.env.PORT, function(){
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
-});
 
+var http = require('http');    
+
+var server = http.createServer (app);
+// delete this line if NOT using socket.io
+var io = require('socket.io').listen(server);   
+
+server.listen(process.env.PORT, function(){
+console.log('Express server on port ' + app.get('port'));
+});
