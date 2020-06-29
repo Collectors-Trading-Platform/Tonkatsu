@@ -4,15 +4,13 @@ var app = express();
 app.use(express.logger());
 
 
-
-var db_config = {
+var connection = mysql.createConnection({
 	host: 'us-cdbr-east-02.cleardb.com',
 	user: 'b5740ca304b5bc',
 	password: 'fee9d940',
 	database: 'heroku_f8290df26fb9a01'
 };
 
-var connection;
 
 function handleDisconnect() {
     console.log('1. connecting to db:');
