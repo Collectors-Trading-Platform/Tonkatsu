@@ -6,9 +6,11 @@ var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
-app.set('view engine', 'handlebars');
+
 
 app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
