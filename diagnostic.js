@@ -100,7 +100,7 @@ app.use(function(err, req, res, next){
   res.render('500');
 });
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3306;
 app.listen(port, function() {
     console.log(port);
 });
