@@ -51,8 +51,8 @@ router.post('/', function(req, res){
     });
 
 
-app.get('/',function(req,res) {
-	res.render('home');
+app.get('/', function(req,res) {
+	res.render('customers');
 });
 
 var selectData = function(res, table) {
