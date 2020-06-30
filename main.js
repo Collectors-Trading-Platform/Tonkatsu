@@ -1,11 +1,4 @@
 var express = require('express');
-var logger = require('morgan');
-var methodOverride = require('method-override');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var errorHandler = require('errorhandler');
-
 var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
 
@@ -17,27 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
 
-app.set('port', process.env.PORT || 3306);
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
-    app.use(favicon(__dirname + '/public/favicon.ico'));
-    app.use(logger('dev'));
-    app.use(methodOverride());
-    app.use(session({ resave: true, saveUninitialized: true, 
-                      secret: 'uwotm8' }));
-
-    // parse application/json
-    app.use(bodyParser.json());                        
-
-    // parse application/x-www-form-urlencoded
-    app.use(bodyParser.urlencoded({ extended: true }));
-
-    // parse multipart/form-data
-    app.use(multer());
-
-    app.use(express.static(path.join(__dirname, 'public')));
-
-
+app.set('port', 20555);
 app.set('mysql', mysql);
 app.use('/workers', require('./workers.js'));
 app.use('/products', require('./products.js'));
@@ -62,5 +35,6 @@ app.use(function(err, req, res, next){
   res.render('500');
 });
 
-console.log('Express server on port ' + app.get('port'));
+app.listen(process.env.PORT, function(){
+  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
