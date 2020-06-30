@@ -2,28 +2,6 @@ var express = require('express');
 var mysql = require('./dbcon.js');
 var app = express();
 
-var session  = require('express-session');
-var cookieParser = require('cookie-parser');
-var morgan = require('morgan');
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-var bodyParser = require('body-parser');
-var mysql = require('./dbcon.js');
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
-app.use(bodyParser.json());
-
-app.use(session({
-	secret: process.env.session_secret,
-	resave: true,
-	saveUninitialized: true
- } )); // session secret
-
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
-
 app.get('/reset-table',function(req,res,next){
   var context = {};
   mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
