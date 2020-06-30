@@ -1,5 +1,5 @@
 var express = require('express');
-var mysql = require('mysql');
+var mysql = require('./dbcon.js');
 var app = express();
 app.use(express.logger());
 
