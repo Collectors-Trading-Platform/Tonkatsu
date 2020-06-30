@@ -22,7 +22,7 @@ app.use('/sections', require('./sections.js'));
 app.use('/customersproducts', require('./customersproducts.js'));
 app.use('/', express.static('public'));
 
-app.get('/',function(req,res) {
+app.get('/:1',function(req,res) {
 	res.render('home');
 });
 
