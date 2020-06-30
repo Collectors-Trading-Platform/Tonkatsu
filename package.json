@@ -4,7 +4,7 @@
   "description": "Project database Tonkatsu Supermarket CS340",
   "main": "diagnostic.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jason Lim and Kimberly Tom",
   "license": "None",
