@@ -1,5 +1,4 @@
 var express = require('express');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var methodOverride = require('method-override');
 var session = require('express-session');
