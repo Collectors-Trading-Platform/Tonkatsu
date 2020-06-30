@@ -22,7 +22,7 @@ app.use('/sections', require('./sections.js'));
 app.use('/customersproducts', require('./customersproducts.js'));
 app.use('/', express.static('public'));
 
-app.get('/:1',function(req,res) {
+app.get('/',function(req,res) {
 	res.render('home');
 });
 
@@ -33,8 +33,11 @@ app.use(function(req,res){
 
 app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.status(500);
-  res.render('500');
+  res.status(err.status || 500);
+  res.json({
+  message: err.message,
+  error: err
+});
 });
 
 app.listen(app.get('port'), () => {
