@@ -6,5 +6,6 @@ var pool = mysql.createPool({
   password        : 'fee9d940',
   database        : 'heroku_f8290df26fb9a01'
 });
+//port 3306
 
 module.exports.pool = pool;
