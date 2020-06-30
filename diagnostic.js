@@ -52,7 +52,7 @@ router.post('/', function(req, res){
 
 
 app.get('/', function(req,res) {
-	res.render('customers');
+	res.render('home');
 });
 
 var selectData = function(res, table) {
