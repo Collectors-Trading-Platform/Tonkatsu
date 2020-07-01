@@ -4,8 +4,8 @@ var mysql = require('mysql');
 var app = express();
 /**
 var bodyParser = require('body-parser');
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 **/
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 // app.use(express.logger());
 
