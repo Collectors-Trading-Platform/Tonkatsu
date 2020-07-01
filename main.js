@@ -1,4 +1,3 @@
-/***
 var express = require('express');
 // var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
@@ -15,12 +14,12 @@ app.use('/static', express.static('public'));
 
 // app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
-app.use('/workers', require('./workers.js'));
-app.use('/products', require('./products.js'));
+//app.use('/workers', require('./workers.js'));
+//app.use('/products', require('./products.js'));
 app.use('/customers', require('./customers.js'));
-app.use('/locations', require('./locations.js'));
-app.use('/sections', require('./sections.js'));
-app.use('/customersproducts', require('./customersproducts.js'));
+//app.use('/locations', require('./locations.js'));
+//app.use('/sections', require('./sections.js'));
+//app.use('/customersproducts', require('./customersproducts.js'));
 app.use('/', express.static('public'));
 
 app.get('/',function(req,res) {
@@ -44,4 +43,4 @@ app.use(function(err, req, res, next){
 app.listen(app.get('port'), () => {
   console.log('Express started on esave.herokuapp.com:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
-***/
+
