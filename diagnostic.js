@@ -39,7 +39,7 @@ function handleDisconnect() {
 handleDisconnect();
 
 app.get('/', function(request, response) {
-    connection.query('SELECT * customerstable', function(err, rows, fields) {
+    connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
         if (err) {
             console.log('error: ', err);
             throw err;
