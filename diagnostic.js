@@ -59,7 +59,7 @@ app.use(express.static('public')); //app.use('/', express.static('public'));
 
 
 app.get('/', function(req, res) {
-	res.render('main', {layout : 'index'});
+	res.render('home', {layout : 'main'});
 });
 
 /**
