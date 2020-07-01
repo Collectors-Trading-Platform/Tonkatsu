@@ -62,6 +62,10 @@ app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
+app.get('/customers', function(req, res) {
+	res.render('customers');//selectData(res, 'customerstable');   
+});
+
 /**
 app.get('/', function(request, response) {
     connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
