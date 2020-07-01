@@ -32,12 +32,12 @@ function getCustomersByHometown(req, res, mysql, context, complete){
 function getCustomers(res, mysql, context, complete){
         //mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	connection.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
-	 function(err, rows, fields){
+	 function(err, result, fields){
             if(err){
                 res.write(JSON.stringify(err));
                 res.end();
             }
-            context.customers = rows;
+            context.customers = result;
             complete();
         });
     }
