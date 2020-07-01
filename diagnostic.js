@@ -57,12 +57,12 @@ layoutsDir: __dirname + '/views/layouts'}));
 // app.use(bodyParser.json());
 app.use(express.static('public')); //app.use('/', express.static('public'));
 
-
+/**
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
-
+*/
 
 app.get('/', function(request, response) {
     connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
