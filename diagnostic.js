@@ -1,12 +1,26 @@
 var express = require('express');
 
-var mysql = require('./dbcon.js');
+// var mysql = require('./dbcon.js');
+
+
 var app = express();
 var port = process.env.PORT || 5000;
 var bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');// .create({defaultLayout:'main'});
 
 // app.use(express.logger());
+
+var mysql = require('mysql');
+var db_config = {
+  	host            : 'us-cdbr-east-02.cleardb.com',
+ 	user            : 'b5740ca304b5bc',
+ 	password        : 'fee9d940',
+ 	database        : 'heroku_f8290df26fb9a01'
+};
+
+var connection;
+
+
 function handleDisconnect() {
     console.log('1. connecting to db:');
     connection = mysql.createConnection(db_config); // Recreate the connection, since
