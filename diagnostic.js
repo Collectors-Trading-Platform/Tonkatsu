@@ -57,7 +57,7 @@ app.use(bodyParser.json());
 app.use('/', express.static('public'));
 
 
-app.get('/', function(request, response) {
+app.get('/', function(req, res) {
 	res.render('home')
 });
 
