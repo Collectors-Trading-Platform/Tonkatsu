@@ -1,11 +1,9 @@
 var mysql = require('mysql');
-var pool = mysql.createPool({
-  connectionLimit : 10,
-  host            : 'us-cdbr-east-02.cleardb.com',
-  user            : 'b5740ca304b5bc',
-  password        : 'fee9d940',
-  database        : 'heroku_f8290df26fb9a01'
-});
-//port 3306
+var db_config = {
+	host            : 'us-cdbr-east-02.cleardb.com',
+	user            : 'b5b7cb5d8126ac',
+	password        : 'b296bab6',
+	database        : 'heroku_fd3a3a2208266f1'
+};
 
-module.exports.pool = pool;
+var connection;
