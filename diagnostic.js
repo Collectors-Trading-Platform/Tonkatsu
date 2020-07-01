@@ -57,11 +57,9 @@ app.use(bodyParser.json());
 app.use('/', express.static('public'));
 
 
-/**
 app.get('/', function(request, response) {
 	res.render('home')
 });
-**/
 
 
 app.get('/', function(request, response) {
@@ -178,7 +176,8 @@ app.use(function(err, req, res, next){
 app.listen(port, function() {
     console.log("Listening on " + port);
 });
-
+/**
 return router
 }();
 
+**/
