@@ -1,7 +1,7 @@
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
-
+/**
 function getHometowns(res, mysql, context, complete){
         mysql.pool.query("SELECT * FROM customerstable", function(error, results, fields){
             if(error){
@@ -26,7 +26,7 @@ function getCustomersByHometown(req, res, mysql, context, complete){
             complete();
         });
 }
-
+**/
 function getCustomers(res, mysql, context, complete){
         mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	 function(error, results, fields){
@@ -38,7 +38,7 @@ function getCustomers(res, mysql, context, complete){
             complete();
         });
     }
-
+/**
 // get specific customer
 function getCustomers1(res, mysql, context, cid, complete){
         var sql = "SELECT cid, cFirstName, cLastName, gender, hometown from customerstable where cid = ?";
@@ -67,6 +67,8 @@ function getCustomersWithNameLike(req, res, mysql, context, complete){
         });
     }
 
+	
+	
 router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -182,3 +184,5 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
     })
 return router;
 }();
+
+**/
