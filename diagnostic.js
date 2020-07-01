@@ -2,9 +2,10 @@ var express = require('express');
 var mysql = require('mysql');
 // var mysql = require('./dbcon.js');
 var app = express();
-
+/**
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+**/
 
 // app.use(express.logger());
 
@@ -47,20 +48,23 @@ function handleDisconnect() {
 
 handleDisconnect();
 
-
+/**
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 // app.set('port', 22250);
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use('/', express.static('public'));
+**/
 
 
+/**
 app.get('/', function(request, response) {
 	res.render('home')
 });
+**/
 
-/**
+
 app.get('/', function(request, response) {
     connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
         if (err) {
@@ -70,7 +74,7 @@ app.get('/', function(request, response) {
         response.send(['Hello World!!!! HOLA MUNDO!!!!', rows]);
     });
 });
-**/
+
 
 /***
 app.get('/reset-table',function(req,res,next){
