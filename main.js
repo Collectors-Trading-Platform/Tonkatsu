@@ -1,5 +1,5 @@
 var express = require('express');
-// var mysql = require('./dbcon.js');
+var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
 
 
-// app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
 //app.use('/workers', require('./workers.js'));
 //app.use('/products', require('./products.js'));
