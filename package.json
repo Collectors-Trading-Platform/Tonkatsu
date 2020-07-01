@@ -10,6 +10,9 @@
   "license": "None",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+     "graceful-fs": {
+            "version": "4.2.2"
+         },
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -26,8 +29,5 @@
   },
   "scripts": {
    "start": "node diagnostic.js"
-},
-   "resolutions": {
-    "graceful-fs": "4.2.3"
-  }
+} 
 }
