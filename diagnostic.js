@@ -88,7 +88,7 @@ router.post('/', function(req, res){
     });
 
 
-app.get('/', function(request,response) {
+app.get('/', function(req, res) {
 	res.render('home');
 });
 
