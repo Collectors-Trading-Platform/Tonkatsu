@@ -149,7 +149,7 @@ router.post('/', function(req, res){
 
 **/
 app.get('/', function(req, res) {
-	res.render('home');
+	res.render('home', {layout : 'main'});
 });
 /**
 var selectData = function(res, table) {
