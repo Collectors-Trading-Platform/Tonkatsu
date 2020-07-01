@@ -2,9 +2,7 @@ var express = require('express');
 var mysql = require('mysql');
 // var mysql = require('./dbcon.js');
 var app = express();
-/**
 var bodyParser = require('body-parser');
-**/
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 // app.use(express.logger());
@@ -52,7 +50,8 @@ var port = process.env.PORT || 5000;
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set(process.env.PORT);
+//app.set(process.env.PORT);
+
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use('/', express.static('public'));
@@ -179,7 +178,7 @@ app.use(function(err, req, res, next){
 app.listen(port, function() {
     console.log("Listening on " + port);
 });
-/**
+
 return router
 }();
-**/
+
