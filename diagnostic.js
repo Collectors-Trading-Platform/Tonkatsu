@@ -1,10 +1,8 @@
 var express = require('express');
 var mysql = require('mysql');
 // var mysql = require('./dbcon.js');
-var app = express();
-var port = process.env.PORT || 5000;
-var bodyParser = require('body-parser');
-const handlebars = require('express-handlebars');// .create({defaultLayout:'main'});
+
+
 
 // app.use(express.logger());
 
@@ -13,12 +11,6 @@ var db_config = {
  	user            : 'b5740ca304b5bc',
  	password        : 'fee9d940',
  	database        : 'heroku_f8290df26fb9a01'
-	/**
-	host            : 'oniddb.cws.oregonstate.edu',
-	user            : 'tomki-db',
-	password        : 'tomki-db',
- 	database        : 'Dq3vSeRCSEd7zPrW'
-	**/
 };
 
 var connection;
@@ -48,14 +40,24 @@ function handleDisconnect() {
 handleDisconnect();
 
 
-app.set('view engine', 'handlebars');
+var app = express();
+const handlebars = require('express-handlebars');// .create({defaultLayout:'main'});
 app.engine('handlebars', handlebars({
 layoutsDir: __dirname + '/views/layouts'}));
+//app.set('view engine', 'handlebars');
+var port = process.env.PORT || 5000;
+var bodyParser = require('body-parser');
+app.set('mysql', mysql);
+app.use('/products', require('./products.js'));
+app.use(express.static('public')); //app.use('/', express.static('public'));
+
+
+
 //app.set(process.env.PORT);
 
 // app.use(bodyParser.urlencoded({ extended: false}));
 // app.use(bodyParser.json());
-app.use(express.static('public')); //app.use('/', express.static('public'));
+
 
 /**
 app.get('/', function(req, res) {
@@ -94,6 +96,8 @@ app.get('/reset-table',function(req,res,next){
   });
 });
 **/
+
+/**
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
@@ -182,7 +186,8 @@ app.listen(port, function() {
     console.log("Listening on " + port);
 });
 
+/**
 return router
 }();
-
+**/
 
