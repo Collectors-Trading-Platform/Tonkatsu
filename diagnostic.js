@@ -50,7 +50,7 @@ var port = process.env.PORT || 5000;
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-//app.set(process.env.PORT);
+app.set(process.env.PORT);
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
