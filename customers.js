@@ -33,8 +33,8 @@ function getCustomers(res, mysql, context, complete){
         //mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	connection.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	 function(err, rows, fields){
-            if(error){
-                res.write(JSON.stringify(error));
+            if(err){
+                res.write(JSON.stringify(err));
                 res.end();
             }
             context.customers = rows;
