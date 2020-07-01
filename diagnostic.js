@@ -38,7 +38,17 @@ function handleDisconnect() {
 
 handleDisconnect();
 
+app.get('/', function(request, response) {
+    connection.query('SELECT * from t_users', function(err, rows, fields) {
+        if (err) {
+            console.log('error: ', err);
+            throw err;
+        }
+        response.send(['Hello World!!!! HOLA MUNDO!!!!', rows]);
+    });
+});
 
+/***
 app.get('/reset-table',function(req,res,next){
   var context = {};
   mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
@@ -125,6 +135,8 @@ app.get('/locations', function(req, res) {
 	res.render('locations');
 	//selectData(res, 'locations');
 });
+
+**/
 
 app.use(function(req,res){
   res.status(404);
