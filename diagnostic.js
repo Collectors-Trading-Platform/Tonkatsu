@@ -1,18 +1,9 @@
 var express = require('express');
 var mysql = require('mysql');
-// var mysql = require('./dbcon.js');
+var mysql = require('./dbcon.js');
 var app = express();
 
 // app.use(express.logger());
-
-var db_config = {
-	host            : 'us-cdbr-east-02.cleardb.com',
-	user            : 'b5b7cb5d8126ac',
-	password        : 'b296bab6',
-	database        : 'heroku_fd3a3a2208266f1'
-};
-
-var connection;
 
 function handleDisconnect() {
     console.log('1. connecting to db:');
