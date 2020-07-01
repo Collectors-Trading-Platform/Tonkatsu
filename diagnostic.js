@@ -64,7 +64,7 @@ app.get('/', function(req, res) {
 
 */
 app.get('/', function(request, response) {
-       connection.query('SELECT cid,cFirstName, cLastName, hometown FROM customerstable', function(err, rows, fields) {
+       connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
 //connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
         if (err) {
             console.log('error: ', err);
