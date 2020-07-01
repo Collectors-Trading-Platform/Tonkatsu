@@ -57,7 +57,7 @@ layoutsDir: __dirname + '/views/layouts'}));
 // app.use(bodyParser.json());
 app.use(express.static('public')); //app.use('/', express.static('public'));
 
-
+/**
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
@@ -78,8 +78,8 @@ function fetch(response){
                 response.end('</table>');
             }};
     }
+*/
 
-/**
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
 //connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
@@ -90,7 +90,6 @@ app.get('/', function(request, response) {
         response.send(['Hello World!!!! HOLA MUNDO!!!!', rows]);
     });
 });
-**/
 
 /***
 app.get('/reset-table',function(req,res,next){
