@@ -61,7 +61,7 @@ app.get('/', function(request, response) {
 	res.render('home')
 });
 
-
+/**
 app.get('/', function(request, response) {
     connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
         if (err) {
@@ -72,7 +72,7 @@ app.get('/', function(request, response) {
     });
 });
 
-
+**/
 /***
 app.get('/reset-table',function(req,res,next){
   var context = {};
