@@ -48,7 +48,12 @@ app.use(express.static('public')); //app.use('/', express.static('public'));
 app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
+app.use('/workers', require('./workers.js'));
+app.use('/products', require('./products.js'));
 app.use('/customers', require('./customers.js'));
+app.use('/locations', require('./locations.js'));
+app.use('/sections', require('./sections.js'));
+app.use('/customersproducts', require('./customersproducts.js'));
 app.use('/', express.static('public'));
 
 //app.set(process.env.PORT);
@@ -80,6 +85,7 @@ function fetch(response){
     }
 **/
 
+/**
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
 //connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
@@ -90,7 +96,7 @@ app.get('/', function(request, response) {
         response.send(['Hello World!!!! HOLA MUNDO!!!!', rows]);
     });
 });
-
+**/
 
 /***
 app.get('/reset-table',function(req,res,next){
@@ -141,11 +147,11 @@ router.post('/', function(req, res){
         });
     });
 
-
+**/
 app.get('/', function(req, res) {
 	res.render('home');
 });
-
+/**
 var selectData = function(res, table) {
   var control = {};
   pool.query('SELECT * FROM ' + table, function(err, rows, fields) {
@@ -157,11 +163,11 @@ var selectData = function(res, table) {
     res.send(control);
   });
 };
-
+**/
 app.get('/customers', function(req, res) {
 	res.render('customers');//selectData(res, 'customerstable');   
 });
-
+/**
 app.get('/products', function(req, res) {
 	res.render('products');
 });
