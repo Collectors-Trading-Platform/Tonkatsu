@@ -27,6 +27,8 @@ function getCustomersByHometown(req, res, mysql, context, complete){
         });
 }
 **/
+	
+	
 function getCustomers(res, mysql, context, complete){
         mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	 function(error, results, fields){
@@ -84,7 +86,7 @@ router.get('/', function(req, res){
 
         }
     });
- /*Display all customers from a given hometown. Requires web based javascript to delete users with AJAX*/
+ //Display all customers from a given hometown. Requires web based javascript to delete users with AJAX
     router.get('/filter/:hometown', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -114,7 +116,7 @@ router.get('/search/:s', function(req, res){
         }
     });
 
-   /* Display one person for the specific purpose of updating people */
+   // Display one person for the specific purpose of updating people 
 
 router.get('/:cid', function(req, res) {
         var callbackCount = 0;
@@ -133,7 +135,7 @@ router.get('/:cid', function(req, res) {
 
 
 
- /* The URI that update data is sent to in order to update a person */
+ // The URI that update data is sent to in order to update a person 
  router.put('/:cid', function(req, res) {
         var mysql = req.app.get('mysql');
         var sql = "UPDATE customerstable SET cFirstName=?, cLastName=?, gender=?, hometown=? WHERE cid=?";
@@ -165,7 +167,7 @@ sql = mysql.pool.query(sql,inserts,function(error, results, fields){
 });
 });
 
-    /* Route to delete a person, simply returns a 202 upon success. Ajax will handle this. */
+    // Route to delete a person, simply returns a 202 upon success. Ajax will handle this. 
 
     router.delete('/:id', function(req, res){
         var mysql = req.app.get('mysql');
