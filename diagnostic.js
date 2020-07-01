@@ -59,11 +59,11 @@ app.use(express.static('public')); //app.use('/', express.static('public'));
 // app.use(bodyParser.json());
 
 
-/**
+
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
-/**
+
 app.get('/customers', function(req, res) {
 	res.render('customers', {layout : 'main'});//selectData(res, 'customerstable');   
 });
