@@ -61,7 +61,7 @@ app.use(express.static('public')); //app.use('/', express.static('public'));
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
-
+/**
 function fetch(response){
     executequery('SELECT * from customerstable', function(result){
         console.log(result);
@@ -78,7 +78,7 @@ function fetch(response){
                 response.end('</table>');
             }};
     }
-
+**/
 /**
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
