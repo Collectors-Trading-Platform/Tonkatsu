@@ -48,14 +48,14 @@ function handleDisconnect() {
 
 handleDisconnect();
 
-/**
+var port = process.env.PORT || 5000;
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-// app.set('port', 22250);
+app.set(process.env.PORT);
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use('/', express.static('public'));
-**/
 
 
 /**
@@ -176,7 +176,6 @@ app.use(function(err, req, res, next){
   res.status(500);
   res.render('500');
 });
-var port = process.env.PORT || 5000;
 app.listen(port, function() {
     console.log("Listening on " + port);
 });
