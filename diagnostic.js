@@ -114,7 +114,7 @@ app.get('/reset-table',function(req,res,next){
     })
   });
 });
-
+**/
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
@@ -130,7 +130,7 @@ module.exports = function(){
             complete();
         });
     }
-
+/**
 router.post('/', function(req, res){
         console.log(req.body)
         var mysql = req.app.get('mysql');
@@ -165,7 +165,7 @@ var selectData = function(res, table) {
 };
 **/
 app.get('/customers', function(req, res) {
-	res.render('customers');//selectData(res, 'customerstable');   
+	res.render('customers', {layout : 'main'});//selectData(res, 'customerstable');   
 });
 /**
 app.get('/products', function(req, res) {
@@ -201,8 +201,8 @@ app.use(function(err, req, res, next){
 app.listen(port, function() {
     console.log("Listening on " + port);
 });
-/**
+
 return router
 }();
 
-**/
+
