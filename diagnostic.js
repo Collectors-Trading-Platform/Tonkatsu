@@ -63,7 +63,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/customers', function(req, res) {
-	res.render('customers');//selectData(res, 'customerstable');   
+	res.render('customers', {layout : 'main'});//selectData(res, 'customerstable');   
 });
 
 /**
