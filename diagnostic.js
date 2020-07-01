@@ -3,7 +3,7 @@ var mysql = require('mysql');
 // var mysql = require('./dbcon.js');
 var app = express();
 
-app.use(express.logger());
+// app.use(express.logger());
 
 var db_config = {
 	host            : 'us-cdbr-east-02.cleardb.com',
