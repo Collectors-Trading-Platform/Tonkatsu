@@ -48,7 +48,7 @@ layoutsDir: __dirname + '/views/layouts'}));
 var port = process.env.PORT || 5000;
 var bodyParser = require('body-parser');
 app.set('mysql', mysql);
-app.use('/products', require('./products.js'));
+app.use('/customers', require('./customers.js'));
 app.use(express.static('public')); //app.use('/', express.static('public'));
 
 
