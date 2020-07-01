@@ -15,32 +15,7 @@
       
     </div>
     
- <table>
-    <thead>
-      <th>Customer ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Gender</th>
-      <th>Hometown</th>
-    </thead>
-    <tbody>
-      {{#each customers}}
-      <tr>
-          <td>{{cid}}</td>
-          <td>{{cFirstName}}</td>
-          <td>{{cLastName}}</td>
-          <td>{{gender}}</td>
-	  <td>{{hometown}}</td>
-<form id='delete_customer' action='/:cid' method='delete'>
-	  <td><button onclick="deleteCustomer({{cid}})">Delete</button></td>
-</form>
 
-	  <td><a class="btn btn-default" href="/customers/{{cid}}">Update</a></td>
-      </tr>
-      {{/each}}
-
-    </tbody>
-  </table>
 
 <br>
 <br>
