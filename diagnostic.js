@@ -6,10 +6,10 @@ var app = express();
 // app.use(express.logger());
 
 var db_config = {
-	host            : 'us-cdbr-east-02.cleardb.com',
-	user            : 'b5b7cb5d8126ac',
-	password        : 'b296bab6',
-	database        : 'heroku_fd3a3a2208266f1'
+  	host            : 'us-cdbr-east-02.cleardb.com',
+ 	user            : 'b5740ca304b5bc',
+ 	password        : 'fee9d940',
+ 	database        : 'heroku_f8290df26fb9a01'
 };
 
 var connection;
