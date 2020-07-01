@@ -54,15 +54,32 @@ layoutsDir: __dirname + '/views/layouts'}));
 //app.set(process.env.PORT);
 
 // app.use(bodyParser.urlencoded({ extended: false}));
-/*/ app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.static('public')); //app.use('/', express.static('public'));
 
-/
+
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
-*/
+function fetch(response){
+    executequery('SELECT * from customerstable', function(result){
+        console.log(result);
+            response.write('<table><tr>');
+            for (var column in result[0]){
+                response.write('<td><label>' + column + </label></td>');
+                res.write('</tr>');
+            }
+            for (var row in result){
+                response.write('<tr>');
+                for (var column in result[row]){
+                    response.write('<td><label>' = result[row][column] + '</label></td>');
+                }
+                response.end('</table>');
+            }};
+    }
+
+/**
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
 //connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
@@ -73,7 +90,7 @@ app.get('/', function(request, response) {
         response.send(['Hello World!!!! HOLA MUNDO!!!!', rows]);
     });
 });
-
+**/
 
 /***
 app.get('/reset-table',function(req,res,next){
