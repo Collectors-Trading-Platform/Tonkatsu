@@ -94,12 +94,11 @@ app.get('/reset-table',function(req,res,next){
     })
   });
 });
-
+**/
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-**/
     function getCustomers(res, mysql, context, complete){
         mysql.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
 
@@ -183,8 +182,8 @@ app.use(function(err, req, res, next){
 app.listen(port, function() {
     console.log("Listening on " + port);
 });
-/**
+
 return router
 }();
 
-**/
+
