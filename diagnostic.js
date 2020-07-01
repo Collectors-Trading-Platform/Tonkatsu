@@ -62,8 +62,6 @@ app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
-app.get('/customers', function(req, res) {
-	res.render('customers', {layout : 'main'});//selectData(res, 'customerstable');   
 
 /**
 app.get('/', function(request, response) {
