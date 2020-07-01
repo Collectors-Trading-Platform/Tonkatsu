@@ -29,13 +29,13 @@ function getCustomersByHometown(req, res, mysql, context, complete){
 
 	
 	
-function getCustomers(res, connection, context, complete){
+function getCustomers(response, mysql, context, complete){
         //mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	connection.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	 function(err, results, fields){
             if(err){
-                res.write(JSON.stringify(err));
-                res.end();
+                response.write(JSON.stringify(err));
+                response.end();
             }
             context.customers = results;
             complete();
