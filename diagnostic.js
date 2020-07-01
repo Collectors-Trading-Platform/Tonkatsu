@@ -54,16 +54,15 @@ layoutsDir: __dirname + '/views/layouts'}));
 //app.set(process.env.PORT);
 
 // app.use(bodyParser.urlencoded({ extended: false}));
-// app.use(bodyParser.json());
+/*/ app.use(bodyParser.json());
 app.use(express.static('public')); //app.use('/', express.static('public'));
 
-
+/
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
-
-/**
+*/
 app.get('/', function(request, response) {
     connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
         if (err) {
@@ -74,7 +73,7 @@ app.get('/', function(request, response) {
     });
 });
 
-**/
+
 /***
 app.get('/reset-table',function(req,res,next){
   var context = {};
