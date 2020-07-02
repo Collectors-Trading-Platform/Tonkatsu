@@ -171,7 +171,7 @@ var selectData = function(res, table) {
 };
 **/
 app.get('/customers', function(req, res) {
-	res.render('customers', {layout : 'main'});//selectData(res, 'customerstable');   
+	res.render('customers');//selectData(res, 'customerstable');   
 });
 /**
 app.get('/products', function(req, res) {
