@@ -30,18 +30,16 @@ function getCustomersByHometown(req, res, mysql, context, complete){
 
 	
 function getCustomers(res, mysql, context, complete){
-        mysql.pool.query("SELECT * FROM customerstable",
-	//mysql.connection.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
-	 function(err, results, fields){
-            if(err){
-                res.write(JSON.stringify(err));
+        mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
+	 function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
                 res.end();
             }
             context.customers = results;
             complete();
         });
     }
-
 // get specific customer
 function getCustomers1(res, mysql, context, cid, complete){
         var sql = "SELECT cid, cFirstName, cLastName, gender, hometown from customerstable where cid = ?";
