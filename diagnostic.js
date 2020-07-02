@@ -3,6 +3,7 @@ var app = express();
 var port = process.env.PORT || 5000;
 var bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');
+var router = express.Router();
 
 
 var mysql = require('mysql');
@@ -80,19 +81,6 @@ function getCustomers(res, mysql, context, complete){
         });
     }
 
-router.get('/', function(req, res){
-        var callbackCount = 0;
-        var context = {};
-        var mysql = req.app.get('mysql');
-        getCustomers(res, mysql, context, complete);
-        function complete(){
-            callbackCount++;
-            if(callbackCount >= 1){
-                res.render('customers', context);
-            }
-
-        }
-    });
 /**
 function fetch(response){
     executequery('SELECT * from customerstable', function(result){
@@ -133,18 +121,20 @@ app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
+	
+router.get('/', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        var mysql = req.app.get('mysql');
+        getCustomers(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('customers', context);
+            }
 
-var selectData = function(res, table) {
-  var control = {};
-  connetion.query('SELECT * FROM ' + table, function(err, rows, fields) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    control.results = rows;
-    res.send(control);
-  });
-};
+        }
+    });
 
 app.use(function(req,res){
   res.status(404);
