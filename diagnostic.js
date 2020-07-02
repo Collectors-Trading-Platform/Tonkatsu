@@ -90,8 +90,8 @@ app.get('/', function(request, response) {
             throw err;
         }
     });
-});*//
-
+});
+**/
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
