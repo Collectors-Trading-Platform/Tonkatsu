@@ -95,6 +95,7 @@ function executeQuery(sql, cb){
 function fetchData(response){
     executeQuery('SELECT * from customerstable', function(result){
         console.log(result);
+	    /**
         response.write('<table><tr>');
         for (var column in result[0]){
             response.write('<td><label>' + column + '</label></td>');
@@ -105,6 +106,7 @@ function fetchData(response){
             for (var column in result[row]){
                 response.write('<td><label>' + result[row][column] + '</label></td>');
             }
+	    **/
             response.end('</table>');
 	}});
     }
