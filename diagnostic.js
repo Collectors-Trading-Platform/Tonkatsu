@@ -50,7 +50,7 @@ app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
 //app.use('/workers', require('./workers.js'));
 //app.use('/products', require('./products.js'));
-app.use('/customers', require('./customers.js'));
+//app.use('/customers', require('./customers.js'));
 //app.use('/locations', require('./locations.js'));
 //app.use('/sections', require('./sections.js'));
 //app.use('/customersproducts', require('./customersproducts.js'));
@@ -157,10 +157,10 @@ app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
-/**
+
 var selectData = function(res, table) {
   var control = {};
-  pool.query('SELECT * FROM ' + table, function(err, rows, fields) {
+  connetion.query('SELECT * FROM ' + table, function(err, rows, fields) {
     if (err) {
       console.log(err);
       return;
@@ -169,8 +169,8 @@ var selectData = function(res, table) {
     res.send(control);
   });
 };
-**/
-app.get('/customers', function(req, res) {
+
+//app.get('/customers', function(req, res) {
 	res.render('customers', {layout : 'main'});//selectData(res, 'customerstable');   
 });
 /**
