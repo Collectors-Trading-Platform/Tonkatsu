@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');
 var router = express.Router();
 
-app.get('/', function(req, res) {
+app.get('/', function(request, response) {
 	res.render('home', {layout : 'main'});
 	fetchData(response);
 	console.log('Done. Displayed Data!!!');
