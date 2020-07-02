@@ -1,6 +1,7 @@
 var express = require('express');
 var mysql = require('mysql');
 var app = express();
+var port = process.env.PORT || 5000;
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var pool = mysql.createPool({
