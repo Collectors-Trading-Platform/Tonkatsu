@@ -6,7 +6,7 @@ const handlebars = require('express-handlebars');
 var router = express.Router();
 
 app.get('/', function(request, response) {
-	res.render('home', {layout : 'main'});
+	//response.render('home', {layout : 'main'});
 	fetchData(response);
 	console.log('Done. Displayed Data!!!');
 });
