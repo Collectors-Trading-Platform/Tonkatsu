@@ -17,7 +17,7 @@ app.set('mysql', mysql);
 app.set('view engine', 'handlebars');
 //app.set('port', 22250);
 app.set('port', process.env.PORT || 5000);
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 app.use('/customers', require('./customers.js'));
 app.use('/', express.static('public'));
