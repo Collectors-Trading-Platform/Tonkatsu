@@ -82,7 +82,7 @@ app.get('/', function(req, res) {
 	console.log("YES! WE HAVE DONE IT");
 });
 
-/**	
+	
 	//functions
 function executeQuery(sql, cb){
      pool.query(sql, function (error,result, fields){
@@ -107,7 +107,7 @@ function fetchData(response){
             response.end('</table>');
         }});
     }
-	**/
+	
 app.use(function(req,res){
   res.status(404);
   res.render('404');
