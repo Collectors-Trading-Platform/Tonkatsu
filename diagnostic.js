@@ -5,11 +5,7 @@ var bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');
 var router = express.Router();
 
-app.get('/', function(request, response) {
-	//response.render('home', {layout : 'main'});
-	fetchData(response);
-	console.log('Done. Displayed Data!!!');
-});
+
 
 var mysql = require('mysql');
 var pool = mysql.createConnection( {
@@ -106,9 +102,15 @@ function fetchData(response){
                 response.write('<td><label>' + result[row][column] + '</label></td>');
             }
             response.end('</table>');
-       });
+	}});
     }
+
 	
+	app.get('/', function(request, response) {
+	//response.render('home', {layout : 'main'});
+	fetchData(response);
+	console.log('Done. Displayed Data!!!');
+});
 app.use(function(req,res){
   res.status(404);
   res.render('404');
