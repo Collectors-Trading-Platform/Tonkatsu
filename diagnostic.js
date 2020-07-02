@@ -49,6 +49,7 @@ app.set('mysql', mysql);
 app.use('/', express.static('public'));
 
 
+
 app.get('/reset-table',function(req,res,next){
   var context = {};
   mysql.connection.query("DROP TABLE IF EXISTS customerstable", function(err){
@@ -65,6 +66,33 @@ app.get('/reset-table',function(req,res,next){
   });
 });
 
+
+function getCustomers(res, mysql, context, complete){
+        //mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
+	connection.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
+	 function(err, results, fields){
+            if(err){
+                res.write(JSON.stringify(err));
+                res.end();
+            }
+            context.customers = results;
+            complete();
+        });
+    }
+
+router.get('/', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        var mysql = req.app.get('mysql');
+        getCustomers(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('customers', context);
+            }
+
+        }
+    });
 /**
 function fetch(response){
     executequery('SELECT * from customerstable', function(result){
