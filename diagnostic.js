@@ -5,12 +5,14 @@ var port = process.env.PORT || 5000;
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var pool = mysql.createPool({
+	connectionLimit : 10,
   	host            : 'us-cdbr-east-02.cleardb.com',
  	user            : 'b5740ca304b5bc',
  	password        : 'fee9d940',
  	database        : 'heroku_f8290df26fb9a01'
 });
 
+module.exports.pool = pool;
 
 app.engine('handlebars', handlebars.engine);
 app.set('mysql', mysql);
