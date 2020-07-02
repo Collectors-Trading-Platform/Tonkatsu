@@ -14,11 +14,11 @@ var pool = mysql.createConnection( {
  	database        : 'heroku_f8290df26fb9a01'
 });
 
-var connection;
+
 
 pool.connect(function(err){
 	if(err){throw err;}
-	console.log("ERROR");
+	console.log("connected to database");
 })
 	
 // function handleDisconnect() {
@@ -75,13 +75,14 @@ module.exports = function(){
 //   });
 // });
 
-
+/**
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
-	fetchData(response);
+	//fetchData(response);
 	console.log("YES! WE HAVE DONE IT");
 });
-	
+**/
+/**	
 	//functions
 function executeQuery(sql, cb){
      pool.query(sql, function (error,result, fields){
@@ -89,7 +90,7 @@ function executeQuery(sql, cb){
         cb(result);
         })
 }
-	
+
 function fetchData(response){
     executeQuery('SELECT * from customerstable', function(result){
         console.log(result);
@@ -106,7 +107,7 @@ function fetchData(response){
             response.end('</table>');
         }});
     }
-	
+	**/
 app.use(function(req,res){
   res.status(404);
   res.render('404');
