@@ -58,23 +58,22 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 	
-
 	
-app.get('/reset-table',function(req,res,next){
-  var context = {};
-  mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
-    var createString = "CREATE TABLE customerstable("+
-    "cid INT PRIMARY KEY AUTO_INCREMENT,"+
-    "cFirstName VARCHAR(50) NOT NULL,"+
-    "cLastName VARCHAR(50) NOT NULL,"+
-    "gender VARCHAR(50) NOT NULL,"+
-    "hometown VARCHAR(50) NOT NULL)";
-    mysql.pool.query(createString, function(err){
-      context.results = "Table reset";
-      res.render('reset',context);
-    })
-  });
-});
+// app.get('/reset-table',function(req,res,next){
+//   var context = {};
+//   mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
+//     var createString = "CREATE TABLE customerstable("+
+//     "cid INT PRIMARY KEY AUTO_INCREMENT,"+
+//     "cFirstName VARCHAR(50) NOT NULL,"+
+//     "cLastName VARCHAR(50) NOT NULL,"+
+//     "gender VARCHAR(50) NOT NULL,"+
+//     "hometown VARCHAR(50) NOT NULL)";
+//     mysql.pool.query(createString, function(err){
+//       context.results = "Table reset";
+//       res.render('reset',context);
+//     })
+//   });
+// });
 
 
 app.get('/', function(req, res) {
