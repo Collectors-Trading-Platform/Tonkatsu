@@ -5,6 +5,11 @@ var bodyParser = require('body-parser');
 const handlebars = require('express-handlebars');
 var router = express.Router();
 
+app.get('/', function(req, res) {
+	res.render('home', {layout : 'main'});
+	fetchData(response);
+	console.log('Done. Displayed Data!!!');
+});
 
 var mysql = require('mysql');
 var pool = mysql.createConnection( {
@@ -18,7 +23,7 @@ var pool = mysql.createConnection( {
 
 pool.connect(function(err){
 	if(err){throw err;}
-	console.log("connected to database");
+	console.log('connected to database');
 })
 	
 // function handleDisconnect() {
@@ -76,11 +81,7 @@ module.exports = function(){
 // });
 
 
-app.get('/', function(req, res) {
-	res.render('home', {layout : 'main'});
-	fetchData(response);
-	console.log("YES! WE HAVE DONE IT");
-});
+
 
 	
 	//functions
