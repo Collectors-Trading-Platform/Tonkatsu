@@ -92,7 +92,7 @@ app.get('/', function(request, response) {
 });
 **/
 
-/***
+
 app.get('/reset-table',function(req,res,next){
   var context = {};
   mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
