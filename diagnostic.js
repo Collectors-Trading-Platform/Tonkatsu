@@ -1,4 +1,26 @@
 var express = require('express');
+var mysql = require('mysql');
+var app = express();
+var bodyParser = require('body-parser');
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+var pool = mysql.createPool({
+  	host            : 'us-cdbr-east-02.cleardb.com',
+ 	user            : 'b5740ca304b5bc',
+ 	password        : 'fee9d940',
+ 	database        : 'heroku_f8290df26fb9a01'
+});
+
+
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+//app.set('port', 22250);
+app.set('port', process.env.PORT || 5000);
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+app.use('/customers', require('./customers.js'));
+app.use('/', express.static('public'));
+/**
+var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
 var bodyParser = require('body-parser');
@@ -16,7 +38,7 @@ var pool = mysql.createConnection({
 
 //var connection;
 //var pool;
-
+**/
 /**
 function handleDisconnect() {
     console.log('1. connecting to db:');
@@ -42,6 +64,7 @@ function handleDisconnect() {
 
 handleDisconnect();
 **/
+/**
 app.engine('handlebars', handlebars({
 layoutsDir: __dirname + '/views/layouts'}));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -57,7 +80,7 @@ app.use('/customers', require('./customers.js'));
 //app.use('/sections', require('./sections.js'));
 //app.use('/customersproducts', require('./customersproducts.js'));
 app.use('/', express.static('public'));
-
+**/
 //app.set(process.env.PORT);
 
 // app.use(bodyParser.urlencoded({ extended: false}));
