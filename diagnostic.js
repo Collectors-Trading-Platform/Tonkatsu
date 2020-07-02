@@ -111,7 +111,6 @@ function fetch(response){
     }
 **/
 
-/**
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
 //connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
@@ -122,7 +121,7 @@ app.get('/', function(request, response) {
         response.send(['Hello World!!!! HOLA MUNDO!!!!', rows]);
     });
 });
-**/
+
 
 /***
 app.get('/reset-table',function(req,res,next){
@@ -189,11 +188,11 @@ router.post('/', function(req, res){
 
 **/
 	
-
+/**
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
-
+**/
 /**
 var selectData = function(res, table) {
   var control = {};
