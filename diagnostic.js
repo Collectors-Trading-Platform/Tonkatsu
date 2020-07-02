@@ -78,7 +78,7 @@ module.exports = function(){
 
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
-	//fetchData(response);
+	fetchData(response);
 	console.log("YES! WE HAVE DONE IT");
 });
 
