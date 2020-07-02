@@ -2,9 +2,8 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
 var bodyParser = require('body-parser');
-const handlebars = require('express-handlebars');// .create({defaultLayout:'main'});
+const handlebars = require('express-handlebars');
 
-// app.use(express.logger());
 
 var mysql = require('mysql');
 var db_config = {
@@ -15,7 +14,6 @@ var db_config = {
 };
 
 var connection;
-
 
 function handleDisconnect() {
     console.log('1. connecting to db:');
@@ -48,24 +46,7 @@ app.use(express.static('public')); //app.use('/', express.static('public'));
 app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
-//app.use('/workers', require('./workers.js'));
-//app.use('/products', require('./products.js'));
-//app.use('/customers', require('./customers.js'));
-//app.use('/locations', require('./locations.js'));
-//app.use('/sections', require('./sections.js'));
-//app.use('/customersproducts', require('./customersproducts.js'));
 app.use('/', express.static('public'));
-
-//app.set(process.env.PORT);
-
-// app.use(bodyParser.urlencoded({ extended: false}));
-// app.use(bodyParser.json());
-
-
-
-//app.get('/', function(req, res) {
-//	res.render('home', {layout : 'main'});
-//});
 /**
 function fetch(response){
     executequery('SELECT * from customerstable', function(result){
@@ -119,40 +100,6 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-/**
-    function getCustomers(res, mysql, context, complete){
-        mysql.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
-
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.customers  = results;
-            complete();
-        });
-    }
-	/**
-
-/**
-router.post('/', function(req, res){
-        console.log(req.body)
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO customerstable (cFirstName, cLastName, gender, hometown) VALUES (?,?,?,?,?)";
-        var inserts = [req.body.cFirstName, req.body.cLastName, req.body.gender, req.body.hometown];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                console.log(JSON.stringify(error))
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/customers');
-            }
-        });
-    });
-
-**/
-	
-
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
@@ -169,30 +116,6 @@ var selectData = function(res, table) {
     res.send(control);
   });
 };
-
-//app.get('/customers', function(req, res) {
-	res.render('customers', {layout : 'main'});//selectData(res, 'customerstable');   
-});
-/**
-app.get('/products', function(req, res) {
-	res.render('products');
-});
-
-app.get('/workers', function(req, res) {
-	res.render('workers');//selectData(res, 'workers');
-});
-
-app.get('/sections', function(req, res) {
-	res.render('sections');
-	//selectData(res, 'sections');
-});
-
-app.get('/locations', function(req, res) {
-	res.render('locations');
-	//selectData(res, 'locations');
-});
-
-**/
 
 app.use(function(req,res){
   res.status(404);
