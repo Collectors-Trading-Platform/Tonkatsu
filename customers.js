@@ -69,18 +69,17 @@ function getCustomersWithNameLike(req, res, mysql, context, complete){
     }
 
 	
-	
 router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-	//context.jsscripts = ["./searchcustomer.js","./filtercustomers.js", "./deleteCustomer.js"];
+	context.jsscripts = ["./searchcustomer.js","./filtercustomers.js", "./deleteCustomer.js"];
         var mysql = req.app.get('mysql');
         getCustomers(res, mysql, context, complete);
 	getHometowns(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
-                results.render('customers', context);
+                res.render('customers', context);
             }
 
         }
