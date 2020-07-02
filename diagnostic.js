@@ -86,21 +86,21 @@ function executeQuery(sql, cb){
         })
 }
 	
-function fetch(response){
+function fetchData(response){
     executeQuery('SELECT * from customerstable', function(result){
         console.log(result);
-            response.write('<table><tr>');
-            for (var column in result[0]){
-                response.write('<td><label>' + column + '</label></td>');
-                res.write('</tr>');
+        response.write('<table><tr>');
+        for (var column in result[0]){
+            response.write('<td><label>' + column + '</label></td>');
+            res.write('</tr>');
+        }
+        for (var row in result){
+            response.write('<tr>');
+            for (var column in result[row]){
+                response.write('<td><label>' + result[row][column] + '</label></td>');
             }
-            for (var row in result){
-                response.write('<tr>');
-                for (var column in result[row]){
-                    response.write('<td><label>' + result[row][column] + '</label></td>');
-                }
-                response.end('</table>');
-            }};
+            response.end('</table>');
+        }});
     }
 	
 app.use(function(req,res){
