@@ -7,8 +7,7 @@ const handlebars = require('express-handlebars');// .create({defaultLayout:'main
 // app.use(express.logger());
 
 var mysql = require('mysql');
-//var db_config = {
-var pool = mysql.createConnection({
+var db_config = {
   	host            : 'us-cdbr-east-02.cleardb.com',
  	user            : 'b5740ca304b5bc',
  	password        : 'fee9d940',
@@ -16,12 +15,12 @@ var pool = mysql.createConnection({
 });
 
 //var connection;
-
+var pool;
 
 function handleDisconnect() {
     console.log('1. connecting to db:');
     //connection = mysql.createConnection(db_config); // Recreate the connection, since
-    pool;													// the old one cannot be reused.
+    pool = mysql.createConnection(db_config);													// the old one cannot be reused.
 
     pool.connect(function(err) {              	// The server is either down
         if (err) {                                     // or restarting (takes a while sometimes).
