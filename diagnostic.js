@@ -48,7 +48,7 @@ pool.connect(function(err){
      });
  }
 
-// handleDisconnect();
+ handleDisconnect();
 
 app.engine('handlebars', handlebars({
 layoutsDir: __dirname + '/views/layouts'}));
