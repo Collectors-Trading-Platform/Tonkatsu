@@ -19,7 +19,7 @@ var connection;
 pool.connect(function(err){
 	if(err){throw err;}
 	console.log("ERROR");
-	
+})
 	
 // function handleDisconnect() {
 //     console.log('1. connecting to :');
@@ -124,5 +124,4 @@ app.listen(port, function() {
 
 return router
 }();
-
 
