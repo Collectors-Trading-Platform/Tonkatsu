@@ -7,16 +7,17 @@ const handlebars = require('express-handlebars');// .create({defaultLayout:'main
 // app.use(express.logger());
 
 var mysql = require('mysql');
-var db_config = {
+var pool = mysql.createConnection({
   	host            : 'us-cdbr-east-02.cleardb.com',
  	user            : 'b5740ca304b5bc',
  	password        : 'fee9d940',
  	database        : 'heroku_f8290df26fb9a01'
-};
+});
 
 //var connection;
-var pool;
+//var pool;
 
+/**
 function handleDisconnect() {
     console.log('1. connecting to db:');
     //connection = mysql.createConnection(db_config); // Recreate the connection, since
@@ -40,14 +41,15 @@ function handleDisconnect() {
 }
 
 handleDisconnect();
-
+**/
 app.engine('handlebars', handlebars({
 layoutsDir: __dirname + '/views/layouts'}));
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static('public')); //app.use('/', express.static('public'));
 app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
+app.use(bodyParser.json());
 //app.use('/workers', require('./workers.js'));
 //app.use('/products', require('./products.js'));
 app.use('/customers', require('./customers.js'));
