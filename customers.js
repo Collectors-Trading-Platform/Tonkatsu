@@ -30,7 +30,7 @@ function getCustomersByHometown(req, res, mysql, context, complete){
 
 	
 function getCustomers(res, mysql, context, complete){
-        mysql.pool.query("SELECT * FROM customerstable", function(error, results, fields){
+        mysql.query("SELECT * FROM customerstable", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -71,7 +71,7 @@ function getCustomersWithNameLike(req, res, mysql, context, complete){
 router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-	context.jsscripts = ["./searchcustomer.js","./filtercustomers.js", "./deleteCustomer.js"];
+	//context.jsscripts = ["./searchcustomer.js","./filtercustomers.js", "./deleteCustomer.js"];
         var mysql = req.app.get('mysql');
         getCustomers(res, mysql, context, complete);
 	getHometowns(res, mysql, context, complete);
