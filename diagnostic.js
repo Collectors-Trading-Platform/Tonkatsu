@@ -12,7 +12,7 @@ var pool = mysql.createPool({
  	database        : 'heroku_f8290df26fb9a01'
 });
 
-module.exports.pool = pool;
+
 
 app.engine('handlebars', handlebars.engine);
 app.set('mysql', mysql);
