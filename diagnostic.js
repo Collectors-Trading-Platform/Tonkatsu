@@ -17,8 +17,7 @@ var pool = mysql.createPool( {
 var connection;
 
 function handleDisconnect() {
-    console.log('1. connecting to 
-		:');
+    console.log('1. connecting to :');
     connection = mysql.createConnection(pool); // Recreate the connection, since
 													// the old one cannot be reused.
 
