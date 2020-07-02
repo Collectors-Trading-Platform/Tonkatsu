@@ -87,7 +87,7 @@ function executeQuery(sql, cb){
 }
 	
 function fetch(response){
-    executequery('SELECT * from customerstable', function(result){
+    executeQuery('SELECT * from customerstable', function(result){
         console.log(result);
             response.write('<table><tr>');
             for (var column in result[0]){
@@ -102,21 +102,7 @@ function fetch(response){
                 response.end('</table>');
             }};
     }
-	/**
-router.get('/', function(req, res){
-        var callbackCount = 0;
-        var context = {};
-        var mysql = req.app.get('mysql');
-        getCustomers(res, mysql, context, complete);
-        function complete(){
-            callbackCount++;
-            if(callbackCount >= 1){
-                res.render('home', context);
-            }
-
-        }
-    });
-**/
+	
 app.use(function(req,res){
   res.status(404);
   res.render('404');
