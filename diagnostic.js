@@ -97,7 +97,7 @@ function fetchData(response){
         console.log(result);
 	    
         response.write('<table><tr>');
-	    /**
+	    
         for (var column in result[0]){
             response.write('<td><label>' + column + '</label></td>');
             response.write('</tr>');
@@ -107,11 +107,12 @@ function fetchData(response){
             for (var column in result[row]){
                 response.write('<td><label>' + result[row][column] + '</label></td>');
             }
-	    **/
-            response.end('</table>');
-	}});
+	    
+            
+	}
+	response.end('</table>');
+	});
     }
-
 	
 	app.get('/', function(request, response) {
 	//response.render('home', {layout : 'main'});
