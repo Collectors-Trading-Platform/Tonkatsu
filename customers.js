@@ -30,7 +30,7 @@ function getCustomersByHometown(req, res, mysql, context, complete){
 
 	
 function getCustomers(res, mysql, context, complete){
-        mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
+        mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown FROM customerstable",
 	 function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
