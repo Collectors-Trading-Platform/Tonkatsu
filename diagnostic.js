@@ -49,7 +49,9 @@ app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
 app.use('/', express.static('public'));
 
-
+module.exports = function(){
+    var express = require('express');
+    var router = express.Router();
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
@@ -69,38 +71,18 @@ app.get('/reset-table',function(req,res,next){
 
 
 function getCustomers(res, mysql, context, complete){
-        //mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
-	connection.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
+	var context = {};
+	mysql.connection.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
 	 function(err, results, fields){
-            if(err){
-                res.write(JSON.stringify(err));
-                res.end();
-            }
-            context.customers = results;
-            complete();
-        });
-    }
-
+	    if(err){
+		res.write(JSON.stringify(err));
+		res.end();
+	    }
+	    context.home = results;
+	    complete();
+	});
+	}
 /**
-function fetch(response){
-    executequery('SELECT * from customerstable', function(result){
-        console.log(result);
-            response.write('<table><tr>');
-            for (var column in result[0]){
-                response.write('<td><label>' + column + <'/label></td>');
-                res.write('</tr>');
-            }
-            for (var row in result){
-                response.write('<tr>');
-                for (var column in result[row]){
-                    response.write('<td><label>' = result[row][column] + '</label></td>');
-                }
-                response.end('</table>');
-            }};
-    }
-**/
-
-
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
         if (err) {
@@ -108,20 +90,12 @@ app.get('/', function(request, response) {
             throw err;
         }
     });
-});
-
-
-
-
-module.exports = function(){
-    var express = require('express');
-    var router = express.Router();
+});*//
 
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
 });
 
-	
 router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
