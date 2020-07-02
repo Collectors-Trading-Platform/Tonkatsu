@@ -180,7 +180,6 @@ app.get('/locations', function(req, res) {
 	//selectData(res, 'locations');
 });
 
-**/
 
 app.use(function(req,res){
   res.status(404);
