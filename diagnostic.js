@@ -119,9 +119,9 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-/**
+
     function getCustomers(res, mysql, context, complete){
-        mysql.pool.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
+        connection.query("SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable", function(error, results, fields){
 
             if(error){
                 res.write(JSON.stringify(error));
@@ -131,7 +131,7 @@ module.exports = function(){
             complete();
         });
     }
-	/**
+
 
 /**
 router.post('/', function(req, res){
