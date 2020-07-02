@@ -52,7 +52,9 @@ app.use('/', express.static('public'));
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
+	
 
+	
 app.get('/reset-table',function(req,res,next){
   var context = {};
   mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
@@ -70,32 +72,37 @@ app.get('/reset-table',function(req,res,next){
 });
 
 
-function getCustomers(res, mysql, context, complete){
-	var context = {};
-	mysql.pool.query("SELECT cid, cFirstName, cLastName, gender, hometown from customerstable",
-	 function(err, results, fields){
-	    if(err){
-		res.write(JSON.stringify(err));
-		res.end();
-	    }
-	    context.home = results;
-	    complete();
-	});
-	}
-/**
-app.get('/', function(request, response) {
-       connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
-        if (err) {
-            console.log('error: ', err);
-            throw err;
-        }
-    });
-});
-**/
 app.get('/', function(req, res) {
 	res.render('home', {layout : 'main'});
+	fetchData(response);
+	console.log("YES! WE HAVE DONE IT");
 });
-
+	
+	//functions
+function executeQuery(sql, cb){
+     pool.query(sql, function (error,result, fields){
+        if(error) {throw error;}
+        cb(result);
+        })
+}
+	
+function fetch(response){
+    executequery('SELECT * from customerstable', function(result){
+        console.log(result);
+            response.write('<table><tr>');
+            for (var column in result[0]){
+                response.write('<td><label>' + column + '</label></td>');
+                res.write('</tr>');
+            }
+            for (var row in result){
+                response.write('<tr>');
+                for (var column in result[row]){
+                    response.write('<td><label>' = result[row][column] + '</label></td>');
+                }
+                response.end('</table>');
+            }};
+    }
+	/**
 router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -109,7 +116,7 @@ router.get('/', function(req, res){
 
         }
     });
-
+**/
 app.use(function(req,res){
   res.status(404);
   res.render('404');
