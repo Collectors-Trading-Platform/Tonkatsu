@@ -95,8 +95,9 @@ function executeQuery(sql, cb){
 function fetchData(response){
     executeQuery('SELECT * from customerstable', function(result){
         console.log(result);
-	    /**
+	    
         response.write('<table><tr>');
+	    /**
         for (var column in result[0]){
             response.write('<td><label>' + column + '</label></td>');
             response.write('</tr>');
