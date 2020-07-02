@@ -84,7 +84,7 @@ function fetch(response){
     }
 **/
 
-
+/**
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
         if (err) {
@@ -93,7 +93,7 @@ app.get('/', function(request, response) {
         }
     });
 });
-
+**/
 
 
 
