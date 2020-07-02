@@ -7,7 +7,7 @@ var router = express.Router();
 
 
 var mysql = require('mysql');
-var pool = mysql.createPool( {
+var pool = mysql.createConnection( {
   	host            : 'us-cdbr-east-02.cleardb.com',
  	user            : 'b5740ca304b5bc',
  	password        : 'fee9d940',
