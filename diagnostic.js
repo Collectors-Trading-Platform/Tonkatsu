@@ -106,7 +106,7 @@ function fetchData(response){
                 response.write('<td><label>' + result[row][column] + '</label></td>');
             }
             response.end('</table>');
-        }});
+       });
     }
 	
 app.use(function(req,res){
