@@ -47,6 +47,24 @@ app.set('view engine', 'handlebars');
 app.set('port', process.env.PORT || 5000);
 app.set('mysql', mysql);
 app.use('/', express.static('public'));
+
+
+app.get('/reset-table',function(req,res,next){
+  var context = {};
+  mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
+    var createString = "CREATE TABLE customerstable("+
+    "cid INT PRIMARY KEY AUTO_INCREMENT,"+
+    "cFirstName VARCHAR(50) NOT NULL,"+
+    "cLastName VARCHAR(50) NOT NULL,"+
+    "gender VARCHAR(50) NOT NULL,"+
+    "hometown VARCHAR(50) NOT NULL)";
+    mysql.pool.query(createString, function(err){
+      context.results = "Table reset";
+      res.render('reset',context);
+    })
+  });
+});
+
 /**
 function fetch(response){
     executequery('SELECT * from customerstable', function(result){
@@ -66,36 +84,19 @@ function fetch(response){
     }
 **/
 
-/**
+/
 app.get('/', function(request, response) {
        connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
-//connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
         if (err) {
             console.log('error: ', err);
             throw err;
         }
-        response.send(['Hello World!!!! HOLA MUNDO!!!!', rows]);
     });
 });
-**/
 
-/***
-app.get('/reset-table',function(req,res,next){
-  var context = {};
-  mysql.pool.query("DROP TABLE IF EXISTS customerstable", function(err){
-    var createString = "CREATE TABLE customerstable("+
-    "cid INT PRIMARY KEY AUTO_INCREMENT,"+
-    "cFirstName VARCHAR(50) NOT NULL,"+
-    "cLastName VARCHAR(50) NOT NULL,"+
-    "gender VARCHAR(50) NOT NULL,"+
-    "hometown VARCHAR(50) NOT NULL)";
-    mysql.pool.query(createString, function(err){
-      context.results = "Table reset";
-      res.render('reset',context);
-    })
-  });
-});
-**/
+
+
+
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
