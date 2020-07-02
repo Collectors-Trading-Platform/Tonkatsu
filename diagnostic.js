@@ -94,7 +94,7 @@ function fetchData(response){
         response.write('<table><tr>');
         for (var column in result[0]){
             response.write('<td><label>' + column + '</label></td>');
-            res.write('</tr>');
+            response.write('</tr>');
         }
         for (var row in result){
             response.write('<tr>');
