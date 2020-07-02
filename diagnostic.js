@@ -28,7 +28,7 @@ pool.connect(function(err){
 
  function handleDisconnect() {
      console.log('1. connecting to :');
-     pool = mysql.createConnection(pool); // Recreate the connection, since
+     pool = mysql.createConnection(db_config); // Recreate the connection, since
  												// the old one cannot be reused.
 
      pool.connect(function(err) {              	// The server is either down
