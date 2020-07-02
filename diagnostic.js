@@ -8,29 +8,28 @@ var router = express.Router();
 
 
 var mysql = require('mysql');
-var pool = mysql.createConnection( {
+//var pool = mysql.createConnection( {
+var db_config = {
   	host            : 'us-cdbr-east-02.cleardb.com',
  	user            : 'b5740ca304b5bc',
  	password        : 'fee9d940',
  	database        : 'heroku_f8290df26fb9a01'
-});
+};
 
+var pool;
 
-
+/**
 pool.connect(function(err){
 	if(err){throw err;}
 	console.log('connected to database');
 })
 	
+**/
+
  function handleDisconnect() {
      console.log('1. connecting to :');
-//    pool = mysql.createConnection(pool); // Recreate the connection, since
- 	var pool = mysql.createConnection( {
-  	host            : 'us-cdbr-east-02.cleardb.com',
- 	user            : 'b5740ca304b5bc',
- 	password        : 'fee9d940',
- 	database        : 'heroku_f8290df26fb9a01'
-});												// the old one cannot be reused.
+     pool = mysql.createConnection(pool); // Recreate the connection, since
+ 												// the old one cannot be reused.
 
      pool.connect(function(err) {              	// The server is either down
          if (err) {                                     // or restarting (takes a while sometimes).
