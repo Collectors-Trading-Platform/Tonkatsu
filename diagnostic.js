@@ -112,7 +112,7 @@ function fetch(response){
 **/
 
 app.get('/', function(request, response) {
-       connection.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
+       pool.query('SELECT cid,cFirstName, cLastName, gender, hometown FROM customerstable', function(err, rows, fields) {
 //connection.query('SELECT * FROM customerstable', function(err, rows, fields) {
         if (err) {
             console.log('error: ', err);
