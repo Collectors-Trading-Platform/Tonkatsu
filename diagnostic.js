@@ -52,7 +52,13 @@ app.set('view engine', 'handlebars');
 app.engine('handlebars', handlebars({
 layoutsDir: __dirname + '/views/layouts'}));
 //app.set(process.env.PORT);
-
+app.set('mysql', mysql);
+app.use('/workers', require('./workers.js'));
+app.use('/products', require('./products.js'));
+app.use('/customers', require('./customers.js'));
+app.use('/locations', require('./locations.js'));
+app.use('/sections', require('./sections.js'));
+app.use('/customersproducts', require('./customersproducts.js'));
 // app.use(bodyParser.urlencoded({ extended: false}));
 // app.use(bodyParser.json());
 app.use(express.static('public')); //app.use('/', express.static('public'));
