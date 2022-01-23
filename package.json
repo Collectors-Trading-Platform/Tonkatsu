@@ -4,15 +4,15 @@
   "description": "Project database Tonkatsu Supermarket CS340",
   "main": "diagnostic.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node diagnostic.js"
   },
   "author": "Jason Lim and Kimberly Tom",
   "license": "None",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-     "graceful-fs": {
-            "version": "4.2.2"
-         },
+    "graceful-fs": {
+      "version": "4.2.2"
+    },
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -26,8 +26,5 @@
   "engines": {
     "node": "11.15.0",
     "npm": "6.14.4"
-  },
-  "scripts": {
-   "start": "node diagnostic.js"
-} 
+  }
 }
