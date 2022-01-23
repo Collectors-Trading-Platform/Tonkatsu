@@ -26,7 +26,6 @@ function getCustomersByHometown(req, res, mysql, context, complete){
             complete();
         });
 }
-**/
 	
 	
 function getCustomers(res, mysql, context, complete){
